@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write --parser typescript '**/*.{ts,tsx}'"
+    "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
+    "build": "tsc && vite build"
   },
   "author": "kevin.tran.2@upstart.com",
   "license": "ISC",

@@ -1,12 +1,17 @@
 import React from "react";
+import WebTextInput from "../../private/WebTextInput";
 
 interface TextInputProps {
-
+  name: string;
+  label: string;
 }
 
-const TextInput: React.FC<TextInputProps> = () => {
+const TextInput: React.FC<TextInputProps> = ({name, label}) => {
   return (
-    <h1>Hello from shared components</h1>
+    <WebTextInput
+      name={name}
+      label={label}
+    />
   );
 };
 

@@ -1,1 +1,3 @@
-export { default } from './WebTextInput';
+import WebTextInput from './WebTextInput';
+
+export default WebTextInput;

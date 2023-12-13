@@ -25,7 +25,20 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     name: 'first-name',
+    id: 'first-name',
+    autoComplete: 'off',
+    value: "kevin",
+    disabled: false,
+    error: false,
+    fullWidth: false,
+    helperText: 'please type your first name',
     label: 'First name',
+    placeholder: 'First name',
+    required: true,
+    type: 'text',
+    onChange: (e) => {
+      console.log(e.target.value)
+    }
   },
 };
 

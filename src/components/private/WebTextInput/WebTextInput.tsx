@@ -12,6 +12,7 @@ declare global {
 }
 
 export interface WebTextInputProps extends DataTestId {
+  autoComplete?: string;
   // Name is our main identifier for property the value will map to
   name: string;
   error?: string;
@@ -20,7 +21,7 @@ export interface WebTextInputProps extends DataTestId {
   type?: string;
   helperText?: string;
   placeholder?: string;
-  autoComplete?: string;
+
   disabled?: boolean;
   currency?: string;
   // Overrides

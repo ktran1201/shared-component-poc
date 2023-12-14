@@ -38,6 +38,23 @@ export const Primary: Story = {
     type: 'text',
     onChange: (e) => {
       console.log(e.target.value)
+    },
+    styleOverrides: {
+      root: {
+        color: 'green',
+        fontSize: '20px',
+        backgroundColor: '#faa0e8'
+      },
+      label: {
+        color: 'black',
+        fontSize: '30px',
+        backgroundColor: '#ff293b'
+      },
+      input: {
+        color: 'green',
+        fontSize: '20px',
+        backgroundColor: '#29eaff',
+      }
     }
   },
 };

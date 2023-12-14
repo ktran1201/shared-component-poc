@@ -4,6 +4,8 @@ import React, { useRef, useEffect, ChangeEvent, FocusEvent } from 'react';
 import FieldLabel from '../FieldLabel';
 // import Tooltip from '../Tooltip';
 import ErrorMessage from '../ErrorMessage';
+import {TextInputStyleOverrides} from "../../public/TextInput/TextInput";
+import styled from "styled-components";
 
 declare global {
   interface DataTestId {
@@ -47,13 +49,55 @@ export interface WebTextInputProps extends DataTestId {
   min?: number;
   max?: number;
   validate?: Function;
+
+  styleOverrides?: TextInputStyleOverrides;
 }
+
+const $colorInputBorderGrey = '#919191';
+const $colorBlackLight = 'grey';
+const $colorPrimaryMed = 'blue';
+
+
+const StyledWebTextInput = styled.div<WebTextInputProps>`
+  display: flex;
+  flex-direction: column;
+  font-size: ${(props) => (props.styleOverrides?.fontSize || '14px')};
+  color: ${(props) => (props.styleOverrides?.color || '#000000')};
+  background-color: ${(props) => (props.styleOverrides?.backgroundColor || '#69a1fa')};
+  width: ${(props) => (props.fullWidth ? '100%' : 'auto')};
+`;
+
+const StyledLabel = styled.label<WebTextInputProps>`
+  font-size: ${(props) => (props.styleOverrides?.fontSize || '14px')};
+  color: ${(props) => (props.styleOverrides?.color || '#000000')};
+  background-color: ${(props) => (props.styleOverrides?.backgroundColor || '#f5ff3b')};
+  margin-bottom: 18px;
+`;
+
+const StyleInput = styled.input<WebTextInputProps>`
+  font-size: ${(props) => (props.styleOverrides?.fontSize || '14px')};
+  color: ${(props) => (props.styleOverrides?.color || '#000000')};
+  background-color: ${(props) => (props.styleOverrides?.backgroundColor || '#ffaa3b')};
+  border-radius: 8px;
+  border: 1px solid ${$colorInputBorderGrey};
+  padding: 8px 16px;
+  font-size: 16px;
+  height: 20px;
+  
+  &:focus {
+    outline: transparent;
+    border-color: ${$colorPrimaryMed};
+  }
+
+  &:disabled {
+    color: ${$colorBlackLight};
+  }
+`;
 
 const WebTextInput = ({
   name,
   label = '',
   type = 'text',
-  tooltip,
   value = '',
   helperText,
   placeholder = '',
@@ -62,9 +106,6 @@ const WebTextInput = ({
   onChange,
   onBlur,
   error = '',
-  inputClassName = '',
-  containerClassName,
-  labelClassName = '',
   currency = '',
   'data-test-id': dataTestId = '',
   maxLength,
@@ -77,15 +118,15 @@ const WebTextInput = ({
   hyperlinkElement,
   appendComponent,
   prependComponent,
-  inputContainerClassName,
   editButton,
   fullWidth,
   max,
   min,
   validate,
+  styleOverrides = {}
 }: WebTextInputProps) => {
   const inputRef = useRef<any>(null);
-
+  const { root: rootStyleOverrides, label: labelStyleOverrides, input: inputStyleOverrides} = styleOverrides;
   useEffect(() => {
     if (inputRef.current && validate) {
       inputRef.current.addEventListener('input', () => {
@@ -122,11 +163,6 @@ const WebTextInput = ({
   }
 
   const defaultProps = {
-    className: classNames({
-      'prodigy-text-input': true,
-      'prodigy-text-input-error': error,
-      [inputClassName]: !!inputClassName,
-    }),
     'data-test-id': `${dataTestId}-text-input`,
     placeholder,
     autoComplete,
@@ -150,29 +186,23 @@ const WebTextInput = ({
   };
 
   return (
-    <div
+    <StyledWebTextInput
       data-test-id={`${dataTestId}-text-input-container`}
-      className={classNames(
-        'prodigy-text-input-container',
-        containerClassName,
-        fullWidth ? 'fullWidth' : ''
-      )}
+      styleOverrides={rootStyleOverrides}
+      fullWidth={fullWidth}
+      primary={true}
     >
       <div className="prodigy-text-input-header">
         {label && (
           // eslint-disable-next-line jsx-a11y/label-has-associated-control
-          <label
+          <StyledLabel
             data-test-id={`${dataTestId}-text-input-label`}
             htmlFor={id || name}
-            className={classNames(
-              'prodigy-text-input-label',
-              error ? 'prodigy-label-error' : '',
-              labelClassName
-            )}
+            styleOverrides={labelStyleOverrides}
           >
             <FieldLabel isRequired={isRequired} label={label} />
             {/*{tooltip && <Tooltip text={tooltip} ariaLabel={name} />}*/}
-          </label>
+          </StyledLabel>
         )}
         {editButton}
       </div>
@@ -180,17 +210,17 @@ const WebTextInput = ({
       <div
         className={classNames(
           'currency-input-container',
-          inputContainerClassName
         )}
       >
         {currency && <span className="currency-symbol">{currency}</span>}
         {prependComponent}
-        <input
+        <StyleInput
           ref={inputRef}
           id={id || name}
           {...defaultProps}
           {...props}
           aria-describedby={`${id || name}-error-helper`}
+          styleOverrides={inputStyleOverrides}
         />
         {isLoading && "Loading"}
         {appendComponent}
@@ -209,7 +239,7 @@ const WebTextInput = ({
         </div>
       )}
       {!(error || helperText) && hyperlinkElement}
-    </div>
+    </StyledWebTextInput>
   );
 };
 

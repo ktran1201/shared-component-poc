@@ -1,6 +1,17 @@
 import React, {ChangeEvent} from "react";
 import WebTextInput from "../../private/WebTextInput";
 
+interface StyleOverrides {
+  color: string;
+  fontSize: string;
+}
+
+export interface TextInputStyleOverrides {
+  root: StyleOverrides;
+  label: StyleOverrides;
+  input: StyleOverrides;
+}
+
 interface TextInputProps {
   name: string;
   id: string;
@@ -20,7 +31,9 @@ interface TextInputProps {
   /**
    * currently support only text and number
    */
-  type?: string;
+  type?: 'text' | 'number';
+
+  styleOverrides?: TextInputStyleOverrides;
 
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -39,6 +52,7 @@ const TextInput: React.FC<TextInputProps> = ({
   required,
   type,
   onChange,
+  styleOverrides
 }) => {
   return (
     <WebTextInput
@@ -55,6 +69,7 @@ const TextInput: React.FC<TextInputProps> = ({
       isRequired={required}
       type={type}
       onChange={onChange}
+      styleOverrides={styleOverrides}
     />
   );
 };

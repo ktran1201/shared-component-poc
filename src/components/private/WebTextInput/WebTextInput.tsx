@@ -57,27 +57,33 @@ const $colorInputBorderGrey = '#919191';
 const $colorBlackLight = 'grey';
 const $colorPrimaryMed = 'blue';
 
+export const $defaultColor = '#000000';
+export const $defaultFontSize = '14px';
+export const $defaultRootBgColor = '#69a1fa';
+export const $defaultLabelBgColor = '#f5ff3b';
+export const $defaultInputBgColor = '#ffaa3b';
+
 
 const StyledWebTextInput = styled.div<WebTextInputProps>`
   display: flex;
   flex-direction: column;
-  font-size: ${(props) => (props.styleOverrides?.fontSize || '14px')};
-  color: ${(props) => (props.styleOverrides?.color || '#000000')};
-  background-color: ${(props) => (props.styleOverrides?.backgroundColor || '#69a1fa')};
+  font-size: ${(props) => (props.styleOverrides?.fontSize || $defaultFontSize)};
+  color: ${(props) => (props.styleOverrides?.color || $defaultColor)};
+  background-color: ${(props) => (props.styleOverrides?.backgroundColor || $defaultRootBgColor)};
   width: ${(props) => (props.fullWidth ? '100%' : 'auto')};
 `;
 
 const StyledLabel = styled.label<WebTextInputProps>`
-  font-size: ${(props) => (props.styleOverrides?.fontSize || '14px')};
-  color: ${(props) => (props.styleOverrides?.color || '#000000')};
-  background-color: ${(props) => (props.styleOverrides?.backgroundColor || '#f5ff3b')};
+  font-size: ${(props) => (props.styleOverrides?.fontSize || $defaultFontSize)};
+  color: ${(props) => (props.styleOverrides?.color || $defaultColor)};
+  background-color: ${(props) => (props.styleOverrides?.backgroundColor || $defaultLabelBgColor)};
   margin-bottom: 18px;
 `;
 
 const StyleInput = styled.input<WebTextInputProps>`
-  font-size: ${(props) => (props.styleOverrides?.fontSize || '14px')};
-  color: ${(props) => (props.styleOverrides?.color || '#000000')};
-  background-color: ${(props) => (props.styleOverrides?.backgroundColor || '#ffaa3b')};
+  font-size: ${(props) => (props.styleOverrides?.fontSize || $defaultFontSize)};
+  color: ${(props) => (props.styleOverrides?.color || $defaultColor)};
+  background-color: ${(props) => (props.styleOverrides?.backgroundColor || $defaultInputBgColor)};
   border-radius: 8px;
   border: 1px solid ${$colorInputBorderGrey};
   padding: 8px 16px;

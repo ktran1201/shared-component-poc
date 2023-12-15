@@ -1,9 +1,17 @@
 import React, {ChangeEvent} from "react";
 import WebTextInput from "../../private/WebTextInput";
+import {TextField} from "@mui/material";
+import {
+  $defaultColor,
+  $defaultFontSize, $defaultInputBgColor,
+  $defaultLabelBgColor,
+  $defaultRootBgColor
+} from "../../private/WebTextInput/WebTextInput";
 
 interface StyleOverrides {
   color: string;
   fontSize: string;
+  backgroundColor: string;
 }
 
 export interface TextInputStyleOverrides {
@@ -54,24 +62,61 @@ const TextInput: React.FC<TextInputProps> = ({
   onChange,
   styleOverrides
 }) => {
-  return (
-    <WebTextInput
-      name={name}
-      id={id}
-      autoComplete={autoComplete}
-      value={value}
-      disabled={disabled}
-      error={error}
-      fullWidth={fullWidth}
-      helperText={helperText}
-      label={label}
-      placeholder={placeholder}
-      isRequired={required}
-      type={type}
-      onChange={onChange}
-      styleOverrides={styleOverrides}
-    />
-  );
+  // return (
+  //   <WebTextInput
+  //     name={name}
+  //     id={id}
+  //     autoComplete={autoComplete}
+  //     value={value}
+  //     disabled={disabled}
+  //     error={error}
+  //     fullWidth={fullWidth}
+  //     helperText={helperText}
+  //     label={label}
+  //     placeholder={placeholder}
+  //     isRequired={required}
+  //     type={type}
+  //     onChange={onChange}
+  //     styleOverrides={styleOverrides}
+  //   />
+  // );
+
+  const { root: rootStyleOverrides, label: labelStyleOverrides, input: inputStyleOverrides} = styleOverrides;
+
+  const sx = {
+    color: rootStyleOverrides.color || $defaultColor,
+    fontSize: rootStyleOverrides.fontSize || $defaultFontSize,
+    backgroundColor: rootStyleOverrides.backgroundColor || $defaultRootBgColor,
+
+    '& .MuiFormLabel-root': {
+      color: labelStyleOverrides.color || $defaultColor,
+      fontSize: labelStyleOverrides.fontSize || $defaultFontSize,
+      backgroundColor: labelStyleOverrides.backgroundColor || $defaultLabelBgColor
+    },
+
+    '& .MuiInputBase-root': {
+      color: inputStyleOverrides.color || $defaultColor,
+      fontSize: inputStyleOverrides.fontSize || $defaultFontSize,
+      backgroundColor: inputStyleOverrides.backgroundColor || $defaultInputBgColor
+    }
+  }
+
+  return <TextField
+    name={name}
+    id={id}
+    autoComplete={autoComplete}
+    value={value}
+    disabled={disabled}
+    error={error}
+    fullWidth={fullWidth}
+    helperText={helperText}
+    label={label}
+    placeholder={placeholder}
+    isRequired={required}
+    type={type}
+    onChange={onChange}
+    sx={sx}
+  />
 };
 
 export default TextInput;

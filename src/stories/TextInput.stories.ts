@@ -41,7 +41,7 @@ export const Primary: Story = {
     },
     styleOverrides: {
       root: {
-        color: 'green',
+        color: '#34fc26',
         fontSize: '20px',
         backgroundColor: '#faa0e8'
       },

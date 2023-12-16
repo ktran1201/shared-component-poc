@@ -95,8 +95,8 @@ const TextInput: React.FC<TextInputProps> = ({
   const { root: rootStyleOverrides, label: labelStyleOverrides, input: inputStyleOverrides} = styleOverrides || {};
 
   const sx = {
-      color: rootStyleOverrides?.color || colorValue || $defaultColor,
-      fontSize: rootStyleOverrides?.fontSize || $defaultFontSize,
+    color: rootStyleOverrides?.color || colorValue || $defaultColor,
+    fontSize: rootStyleOverrides?.fontSize || $defaultFontSize,
 
     '& .MuiFormLabel-root': {
       color: labelStyleOverrides?.color || colorValue || $defaultColor,
@@ -106,6 +106,11 @@ const TextInput: React.FC<TextInputProps> = ({
     '& .MuiInputBase-root': {
       color: inputStyleOverrides?.color || colorValue || $defaultColor,
       fontSize: inputStyleOverrides?.fontSize || $defaultFontSize,
+    },
+
+    '& .MuiFormHelperText-root': {
+      color: rootStyleOverrides?.color || colorValue || $defaultColor,
+      fontSize: rootStyleOverrides?.fontSize || $defaultFontSize,
     }
   }
 

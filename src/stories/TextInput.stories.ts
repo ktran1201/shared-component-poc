@@ -63,7 +63,7 @@ export const useWebComponentOverride: Story = {
     styleOverrides: {
       root: {
         color: 'purple',
-        fontSize: '12px',
+        fontSize: '14px',
       },
       label: {
         color: 'red',
@@ -120,7 +120,7 @@ export const useMUIComponentOverride: Story = {
     styleOverrides: {
       root: {
         color: 'purple',
-        fontSize: '12px',
+        fontSize: '14px',
       },
       label: {
         color: 'red',

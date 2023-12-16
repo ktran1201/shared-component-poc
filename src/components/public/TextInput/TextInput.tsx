@@ -7,7 +7,7 @@ import {
   $defaultLabelBgColor,
   $defaultRootBgColor
 } from "../../private/WebTextInput/WebTextInput";
-import { AppThemeContext } from "../../../consumer/theme";
+import {AppThemeContext} from "../../../consumer/useTheme";
 
 interface StyleOverrides {
   color: string;

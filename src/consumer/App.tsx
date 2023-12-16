@@ -1,10 +1,12 @@
 import React from "react";
 import {TextInput} from "../components/public/TextInput";
-import {appTheme, AppThemeContext} from "./theme";
+import {useTheme, AppThemeContext} from "./useTheme";
 
 const App = () => {
+  const theme = useTheme();
+
   return (
-    <AppThemeContext.Provider value={appTheme}>
+    <AppThemeContext.Provider value={theme}>
       <TextInput
         name='first-name'
         id='first-name'

@@ -51,6 +51,7 @@ export interface WebTextInputProps extends DataTestId {
   validate?: Function;
 
   styleOverrides?: TextInputStyleOverrides;
+  color?: string;
 }
 
 const $colorInputBorderGrey = '#919191';
@@ -68,21 +69,21 @@ const StyledWebTextInput = styled.div<WebTextInputProps>`
   display: flex;
   flex-direction: column;
   font-size: ${(props) => (props.styleOverrides?.fontSize || $defaultFontSize)};
-  color: ${(props) => (props.styleOverrides?.color || $defaultColor)};
+  color: ${(props) => (props.styleOverrides?.color || props.color || $defaultColor)};
   background-color: ${(props) => (props.styleOverrides?.backgroundColor || $defaultRootBgColor)};
   width: ${(props) => (props.fullWidth ? '100%' : 'auto')};
 `;
 
 const StyledLabel = styled.label<WebTextInputProps>`
   font-size: ${(props) => (props.styleOverrides?.fontSize || $defaultFontSize)};
-  color: ${(props) => (props.styleOverrides?.color || $defaultColor)};
+  color: ${(props) => (props.styleOverrides?.color || props.color || $defaultColor)};
   background-color: ${(props) => (props.styleOverrides?.backgroundColor || $defaultLabelBgColor)};
   margin-bottom: 18px;
 `;
 
 const StyleInput = styled.input<WebTextInputProps>`
   font-size: ${(props) => (props.styleOverrides?.fontSize || $defaultFontSize)};
-  color: ${(props) => (props.styleOverrides?.color || $defaultColor)};
+  color: ${(props) => (props.styleOverrides?.color || props.color || $defaultColor)};
   background-color: ${(props) => (props.styleOverrides?.backgroundColor || $defaultInputBgColor)};
   border-radius: 8px;
   border: 1px solid ${$colorInputBorderGrey};
@@ -129,7 +130,8 @@ const WebTextInput = ({
   max,
   min,
   validate,
-  styleOverrides = {}
+  styleOverrides = {},
+                        color
 }: WebTextInputProps) => {
   const inputRef = useRef<any>(null);
   const { root: rootStyleOverrides, label: labelStyleOverrides, input: inputStyleOverrides} = styleOverrides;
@@ -197,6 +199,7 @@ const WebTextInput = ({
       styleOverrides={rootStyleOverrides}
       fullWidth={fullWidth}
       primary={true}
+      color={color}
     >
       <div className="prodigy-text-input-header">
         {label && (
@@ -205,6 +208,7 @@ const WebTextInput = ({
             data-test-id={`${dataTestId}-text-input-label`}
             htmlFor={id || name}
             styleOverrides={labelStyleOverrides}
+            color={color}
           >
             <FieldLabel isRequired={isRequired} label={label} />
             {/*{tooltip && <Tooltip text={tooltip} ariaLabel={name} />}*/}
@@ -227,6 +231,7 @@ const WebTextInput = ({
           {...props}
           aria-describedby={`${id || name}-error-helper`}
           styleOverrides={inputStyleOverrides}
+          color={color}
         />
         {isLoading && "Loading"}
         {appendComponent}

@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useContext} from "react";
 import WebTextInput from "../../private/WebTextInput";
 import {TextField} from "@mui/material";
 import {
@@ -7,6 +7,7 @@ import {
   $defaultLabelBgColor,
   $defaultRootBgColor
 } from "../../private/WebTextInput/WebTextInput";
+import { AppThemeContext } from "../../../consumer/theme";
 
 interface StyleOverrides {
   color: string;
@@ -44,6 +45,8 @@ interface TextInputProps {
   styleOverrides?: TextInputStyleOverrides;
 
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+
+  color: string
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -60,63 +63,74 @@ const TextInput: React.FC<TextInputProps> = ({
   required,
   type,
   onChange,
-  styleOverrides
+  styleOverrides,
+  color
 }) => {
-  // return (
-  //   <WebTextInput
-  //     name={name}
-  //     id={id}
-  //     autoComplete={autoComplete}
-  //     value={value}
-  //     disabled={disabled}
-  //     error={error}
-  //     fullWidth={fullWidth}
-  //     helperText={helperText}
-  //     label={label}
-  //     placeholder={placeholder}
-  //     isRequired={required}
-  //     type={type}
-  //     onChange={onChange}
-  //     styleOverrides={styleOverrides}
-  //   />
-  // );
+  const theme = useContext(AppThemeContext);
+  console.log("theme", theme)
+  const colorValue = theme.color[color];
 
-  const { root: rootStyleOverrides, label: labelStyleOverrides, input: inputStyleOverrides} = styleOverrides;
+  return (
+    <WebTextInput
+      name={name}
+      id={id}
+      autoComplete={autoComplete}
+      value={value}
+      disabled={disabled}
+      error={error}
+      fullWidth={fullWidth}
+      helperText={helperText}
+      label={label}
+      placeholder={placeholder}
+      isRequired={required}
+      type={type}
+      onChange={onChange}
+      styleOverrides={styleOverrides}
+      color={colorValue}
+    />
+  );
 
-  const sx = {
-    color: rootStyleOverrides.color || $defaultColor,
-    fontSize: rootStyleOverrides.fontSize || $defaultFontSize,
-    backgroundColor: rootStyleOverrides.backgroundColor || $defaultRootBgColor,
-
-    '& .MuiFormLabel-root': {
-      color: labelStyleOverrides.color || $defaultColor,
-      fontSize: labelStyleOverrides.fontSize || $defaultFontSize,
-      backgroundColor: labelStyleOverrides.backgroundColor || $defaultLabelBgColor
-    },
-
-    '& .MuiInputBase-root': {
-      color: inputStyleOverrides.color || $defaultColor,
-      fontSize: inputStyleOverrides.fontSize || $defaultFontSize,
-      backgroundColor: inputStyleOverrides.backgroundColor || $defaultInputBgColor
-    }
-  }
-
-  return <TextField
-    name={name}
-    id={id}
-    autoComplete={autoComplete}
-    value={value}
-    disabled={disabled}
-    error={error}
-    fullWidth={fullWidth}
-    helperText={helperText}
-    label={label}
-    placeholder={placeholder}
-    isRequired={required}
-    type={type}
-    onChange={onChange}
-    sx={sx}
-  />
+  // const { root: rootStyleOverrides, label: labelStyleOverrides, input: inputStyleOverrides} = styleOverrides || {};
+  //
+  // const sx = {
+  //   ...(rootStyleOverrides && {
+  //     color: rootStyleOverrides.color || $defaultColor,
+  //     fontSize: rootStyleOverrides.fontSize || $defaultFontSize,
+  //     backgroundColor: rootStyleOverrides.backgroundColor || $defaultRootBgColor,
+  //   }),
+  //
+  //   ...(labelStyleOverrides && {'& .MuiFormLabel-root': {
+  //     color: labelStyleOverrides.color || $defaultColor,
+  //     fontSize: labelStyleOverrides.fontSize || $defaultFontSize,
+  //     backgroundColor: labelStyleOverrides.backgroundColor || $defaultLabelBgColor
+  //   }}),
+  //
+  //   ...(inputStyleOverrides && {'& .MuiInputBase-root': {
+  //     color: inputStyleOverrides.color || $defaultColor,
+  //     fontSize: inputStyleOverrides.fontSize || $defaultFontSize,
+  //     backgroundColor: inputStyleOverrides.backgroundColor || $defaultInputBgColor
+  //   }})
+  // }
+  //
+  // console.log("sx", sx)
+  //
+  // return <TextField
+  //   name={name}
+  //   id={id}
+  //   autoComplete={autoComplete}
+  //   value={value}
+  //   disabled={disabled}
+  //   error={error}
+  //   fullWidth={fullWidth}
+  //   helperText={helperText}
+  //   label={label}
+  //   placeholder={placeholder}
+  //   isRequired={required}
+  //   type={type}
+  //   onChange={onChange}
+  //   sx={sx}
+  //   color="warning"
+  // />
 };
 
 export default TextInput;

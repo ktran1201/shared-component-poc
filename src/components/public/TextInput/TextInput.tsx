@@ -3,9 +3,7 @@ import WebTextInput from "../../private/WebTextInput";
 import {TextField} from "@mui/material";
 import {
   $defaultColor,
-  $defaultFontSize, $defaultInputBgColor,
-  $defaultLabelBgColor,
-  $defaultRootBgColor
+  $defaultFontSize
 } from "../../private/WebTextInput/WebTextInput";
 import {AppThemeContext} from "../../../consumer/useTheme";
 

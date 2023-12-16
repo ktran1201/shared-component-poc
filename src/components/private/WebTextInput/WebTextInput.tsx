@@ -59,10 +59,7 @@ const $colorBlackLight = 'grey';
 const $colorPrimaryMed = 'blue';
 
 export const $defaultColor = '#000000';
-export const $defaultFontSize = '14px';
-export const $defaultRootBgColor = '#69a1fa';
-export const $defaultLabelBgColor = '#f5ff3b';
-export const $defaultInputBgColor = '#ffaa3b';
+export const $defaultFontSize = '16px';
 
 
 const StyledWebTextInput = styled.div<WebTextInputProps>`

@@ -22,7 +22,28 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const useWebComponent: Story = {
+export const useWebComponentDefault: Story = {
+  args: {
+    name: 'first-name',
+    id: 'first-name',
+    autoComplete: 'off',
+    value: "kevin",
+    disabled: false,
+    error: false,
+    fullWidth: false,
+    helperText: 'please type your first name',
+    label: 'First name',
+    placeholder: 'First name',
+    required: true,
+    type: 'text',
+    onChange: (e) => {
+      console.log(e.target.value)
+    },
+    useWebComponent: true
+  },
+};
+
+export const useWebComponentOverride: Story = {
   args: {
     name: 'first-name',
     id: 'first-name',
@@ -41,19 +62,16 @@ export const useWebComponent: Story = {
     },
     styleOverrides: {
       root: {
-        color: '#34fc26',
-        fontSize: '20px',
-        backgroundColor: '#faa0e8'
+        color: 'purple',
+        fontSize: '12px',
       },
       label: {
-        color: 'black',
+        color: 'red',
         fontSize: '30px',
-        backgroundColor: '#ff293b'
       },
       input: {
         color: 'green',
         fontSize: '20px',
-        backgroundColor: '#29eaff',
       }
     },
     useWebComponent: true
@@ -61,7 +79,28 @@ export const useWebComponent: Story = {
 };
 
 
-export const useMUIComponent: Story = {
+export const useMUIComponentDefault: Story = {
+  args: {
+    name: 'first-name',
+    id: 'first-name',
+    autoComplete: 'off',
+    value: "kevin",
+    disabled: false,
+    error: false,
+    fullWidth: false,
+    helperText: 'please type your first name',
+    label: 'First name',
+    placeholder: 'First name',
+    required: true,
+    type: 'text',
+    onChange: (e) => {
+      console.log(e.target.value)
+    },
+    useWebComponent: false
+  },
+};
+
+export const useMUIComponentOverride: Story = {
   args: {
     name: 'first-name',
     id: 'first-name',
@@ -80,19 +119,16 @@ export const useMUIComponent: Story = {
     },
     styleOverrides: {
       root: {
-        color: '#34fc26',
-        fontSize: '20px',
-        backgroundColor: '#faa0e8'
+        color: 'purple',
+        fontSize: '12px',
       },
       label: {
-        color: 'black',
+        color: 'red',
         fontSize: '30px',
-        backgroundColor: '#ff293b'
       },
       input: {
         color: 'green',
         fontSize: '20px',
-        backgroundColor: '#29eaff',
       }
     },
     useWebComponent: false

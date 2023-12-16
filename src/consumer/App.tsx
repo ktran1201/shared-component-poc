@@ -4,9 +4,10 @@ import {useTheme, AppThemeContext} from "./useTheme";
 
 interface AppProps {
   useWebComponent?: boolean;
+  usePrimaryColor?: boolean;
 }
 
-const App: React.FC<AppProps> = ({useWebComponent}) => {
+const App: React.FC<AppProps> = ({useWebComponent, usePrimaryColor}) => {
   const theme = useTheme();
 
   return (
@@ -24,7 +25,7 @@ const App: React.FC<AppProps> = ({useWebComponent}) => {
         placeholder = 'First name'
         required={true}
         type='text'
-        color="primary"
+        color={usePrimaryColor ? "primary" : "secondary"}
         useWebComponent={useWebComponent}
       />
     </AppThemeContext.Provider>

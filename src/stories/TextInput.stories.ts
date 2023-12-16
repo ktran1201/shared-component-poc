@@ -74,6 +74,9 @@ export const useWebComponentOverride: Story = {
         fontSize: '20px',
       }
     },
+    textOverrides: {
+      label: 'first name (override)'
+    },
     useWebComponent: true
   },
 };
@@ -130,6 +133,9 @@ export const useMUIComponentOverride: Story = {
         color: 'green',
         fontSize: '20px',
       }
+    },
+    textOverrides: {
+      label: 'first name (override)'
     },
     useWebComponent: false
   },

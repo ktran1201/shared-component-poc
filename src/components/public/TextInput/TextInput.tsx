@@ -18,6 +18,10 @@ export interface TextInputStyleOverrides {
   input: StyleOverrides;
 }
 
+export interface TextInputTextOverrides {
+  label: string;
+}
+
 interface TextInputProps {
   name: string;
   id: string;
@@ -40,6 +44,7 @@ interface TextInputProps {
   type?: 'text' | 'number';
 
   styleOverrides?: TextInputStyleOverrides;
+  textOverrides?: TextInputTextOverrides;
 
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 
@@ -62,37 +67,42 @@ const TextInput: React.FC<TextInputProps> = ({
   type,
   onChange,
   styleOverrides,
+  textOverrides,
   color,
                                                useWebComponent,
 }) => {
   const theme = useContext(AppThemeContext);
   console.log("theme", theme)
   const colorValue = theme?.color?.[color];
-
   if (useWebComponent) {
     return (
-      <WebTextInput
-        name={name}
-        id={id}
-        autoComplete={autoComplete}
-        value={value}
-        disabled={disabled}
-        error={error}
-        fullWidth={fullWidth}
-        helperText={helperText}
-        label={label}
-        placeholder={placeholder}
-        isRequired={required}
-        type={type}
-        onChange={onChange}
-        styleOverrides={styleOverrides}
-        color={colorValue}
-      />
+      <>
+        <WebTextInput
+          name={name}
+          id={id}
+          autoComplete={autoComplete}
+          value={value}
+          disabled={disabled}
+          error={error}
+          fullWidth={fullWidth}
+          helperText={helperText}
+          label={label}
+          placeholder={placeholder}
+          isRequired={required}
+          type={type}
+          onChange={onChange}
+          styleOverrides={styleOverrides}
+          textOverrides={textOverrides}
+          color={colorValue}
+        />
+      </>
+
     );
   }
 
 
   const { root: rootStyleOverrides, label: labelStyleOverrides, input: inputStyleOverrides} = styleOverrides || {};
+  const { label: labelTextOverrides} = textOverrides || {};
 
   const sx = {
     color: rootStyleOverrides?.color || colorValue || $defaultColor,
@@ -125,7 +135,7 @@ const TextInput: React.FC<TextInputProps> = ({
     error={error}
     fullWidth={fullWidth}
     helperText={helperText}
-    label={label}
+    label={labelTextOverrides || label}
     placeholder={placeholder}
     isRequired={required}
     type={type}

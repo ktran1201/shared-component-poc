@@ -4,7 +4,7 @@ import React, { useRef, useEffect, ChangeEvent, FocusEvent } from 'react';
 import FieldLabel from '../FieldLabel';
 // import Tooltip from '../Tooltip';
 import ErrorMessage from '../ErrorMessage';
-import {TextInputStyleOverrides} from "../../public/TextInput/TextInput";
+import {TextInputStyleOverrides, TextInputTextOverrides} from "../../public/TextInput/TextInput";
 import styled from "styled-components";
 
 declare global {
@@ -51,6 +51,7 @@ export interface WebTextInputProps extends DataTestId {
   validate?: Function;
 
   styleOverrides?: TextInputStyleOverrides;
+  textOverrides?: TextInputTextOverrides;
   color?: string;
 }
 
@@ -125,10 +126,12 @@ const WebTextInput = ({
   min,
   validate,
   styleOverrides = {},
+                        textOverrides = {},
                         color
 }: WebTextInputProps) => {
   const inputRef = useRef<any>(null);
   const { root: rootStyleOverrides, label: labelStyleOverrides, input: inputStyleOverrides} = styleOverrides;
+  const { label: labelTextOverrides} = textOverrides;
   useEffect(() => {
     if (inputRef.current && validate) {
       inputRef.current.addEventListener('input', () => {
@@ -196,7 +199,7 @@ const WebTextInput = ({
       color={color}
     >
       <div className="prodigy-text-input-header">
-        {label && (
+        {(label || labelTextOverrides) && (
           // eslint-disable-next-line jsx-a11y/label-has-associated-control
           <StyledLabel
             data-test-id={`${dataTestId}-text-input-label`}
@@ -204,7 +207,7 @@ const WebTextInput = ({
             styleOverrides={labelStyleOverrides}
             color={color}
           >
-            <FieldLabel isRequired={isRequired} label={label} />
+            <FieldLabel isRequired={isRequired} label={labelTextOverrides || label} />
             {/*{tooltip && <Tooltip text={tooltip} ariaLabel={name} />}*/}
           </StyledLabel>
         )}

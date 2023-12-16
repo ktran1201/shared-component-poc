@@ -12,7 +12,6 @@ import {AppThemeContext} from "../../../consumer/useTheme";
 interface StyleOverrides {
   color: string;
   fontSize: string;
-  backgroundColor: string;
 }
 
 export interface TextInputStyleOverrides {
@@ -47,6 +46,7 @@ interface TextInputProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 
   color: string
+  useWebComponent?: boolean;
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -64,73 +64,72 @@ const TextInput: React.FC<TextInputProps> = ({
   type,
   onChange,
   styleOverrides,
-  color
+  color,
+                                               useWebComponent,
 }) => {
   const theme = useContext(AppThemeContext);
   console.log("theme", theme)
-  const colorValue = theme.color[color];
+  const colorValue = theme?.color?.[color];
 
-  return (
-    <WebTextInput
-      name={name}
-      id={id}
-      autoComplete={autoComplete}
-      value={value}
-      disabled={disabled}
-      error={error}
-      fullWidth={fullWidth}
-      helperText={helperText}
-      label={label}
-      placeholder={placeholder}
-      isRequired={required}
-      type={type}
-      onChange={onChange}
-      styleOverrides={styleOverrides}
-      color={colorValue}
-    />
-  );
+  if (useWebComponent) {
+    return (
+      <WebTextInput
+        name={name}
+        id={id}
+        autoComplete={autoComplete}
+        value={value}
+        disabled={disabled}
+        error={error}
+        fullWidth={fullWidth}
+        helperText={helperText}
+        label={label}
+        placeholder={placeholder}
+        isRequired={required}
+        type={type}
+        onChange={onChange}
+        styleOverrides={styleOverrides}
+        color={colorValue}
+      />
+    );
+  }
 
-  // const { root: rootStyleOverrides, label: labelStyleOverrides, input: inputStyleOverrides} = styleOverrides || {};
-  //
-  // const sx = {
-  //   ...(rootStyleOverrides && {
-  //     color: rootStyleOverrides.color || $defaultColor,
-  //     fontSize: rootStyleOverrides.fontSize || $defaultFontSize,
-  //     backgroundColor: rootStyleOverrides.backgroundColor || $defaultRootBgColor,
-  //   }),
-  //
-  //   ...(labelStyleOverrides && {'& .MuiFormLabel-root': {
-  //     color: labelStyleOverrides.color || $defaultColor,
-  //     fontSize: labelStyleOverrides.fontSize || $defaultFontSize,
-  //     backgroundColor: labelStyleOverrides.backgroundColor || $defaultLabelBgColor
-  //   }}),
-  //
-  //   ...(inputStyleOverrides && {'& .MuiInputBase-root': {
-  //     color: inputStyleOverrides.color || $defaultColor,
-  //     fontSize: inputStyleOverrides.fontSize || $defaultFontSize,
-  //     backgroundColor: inputStyleOverrides.backgroundColor || $defaultInputBgColor
-  //   }})
-  // }
-  //
-  // console.log("sx", sx)
-  //
-  // return <TextField
-  //   name={name}
-  //   id={id}
-  //   autoComplete={autoComplete}
-  //   value={value}
-  //   disabled={disabled}
-  //   error={error}
-  //   fullWidth={fullWidth}
-  //   helperText={helperText}
-  //   label={label}
-  //   placeholder={placeholder}
-  //   isRequired={required}
-  //   type={type}
-  //   onChange={onChange}
-  //   sx={sx}
-  //   color="warning"
-  // />
+
+  const { root: rootStyleOverrides, label: labelStyleOverrides, input: inputStyleOverrides} = styleOverrides || {};
+
+  const sx = {
+      color: rootStyleOverrides?.color || colorValue || $defaultColor,
+      fontSize: rootStyleOverrides?.fontSize || $defaultFontSize,
+
+    '& .MuiFormLabel-root': {
+      color: labelStyleOverrides?.color || colorValue || $defaultColor,
+      fontSize: labelStyleOverrides?.fontSize || $defaultFontSize,
+    },
+
+    '& .MuiInputBase-root': {
+      color: inputStyleOverrides?.color || colorValue || $defaultColor,
+      fontSize: inputStyleOverrides?.fontSize || $defaultFontSize,
+    }
+  }
+
+  console.log("sx", sx)
+
+  return <TextField
+    name={name}
+    id={id}
+    autoComplete={autoComplete}
+    value={value}
+    disabled={disabled}
+    error={error}
+    fullWidth={fullWidth}
+    helperText={helperText}
+    label={label}
+    placeholder={placeholder}
+    isRequired={required}
+    type={type}
+    onChange={onChange}
+    sx={sx}
+    color="warning"
+  />
 };
 
 export default TextInput;

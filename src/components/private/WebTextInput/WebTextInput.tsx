@@ -70,21 +70,18 @@ const StyledWebTextInput = styled.div<WebTextInputProps>`
   flex-direction: column;
   font-size: ${(props) => (props.styleOverrides?.fontSize || $defaultFontSize)};
   color: ${(props) => (props.styleOverrides?.color || props.color || $defaultColor)};
-  background-color: ${(props) => (props.styleOverrides?.backgroundColor || $defaultRootBgColor)};
   width: ${(props) => (props.fullWidth ? '100%' : 'auto')};
 `;
 
 const StyledLabel = styled.label<WebTextInputProps>`
   font-size: ${(props) => (props.styleOverrides?.fontSize || $defaultFontSize)};
   color: ${(props) => (props.styleOverrides?.color || props.color || $defaultColor)};
-  background-color: ${(props) => (props.styleOverrides?.backgroundColor || $defaultLabelBgColor)};
   margin-bottom: 18px;
 `;
 
 const StyleInput = styled.input<WebTextInputProps>`
   font-size: ${(props) => (props.styleOverrides?.fontSize || $defaultFontSize)};
   color: ${(props) => (props.styleOverrides?.color || props.color || $defaultColor)};
-  background-color: ${(props) => (props.styleOverrides?.backgroundColor || $defaultInputBgColor)};
   border-radius: 8px;
   border: 1px solid ${$colorInputBorderGrey};
   padding: 8px 16px;

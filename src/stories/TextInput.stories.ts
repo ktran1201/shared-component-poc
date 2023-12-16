@@ -22,7 +22,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Primary: Story = {
+export const useWebComponent: Story = {
   args: {
     name: 'first-name',
     id: 'first-name',
@@ -55,7 +55,46 @@ export const Primary: Story = {
         fontSize: '20px',
         backgroundColor: '#29eaff',
       }
-    }
+    },
+    useWebComponent: true
   },
 };
 
+
+export const useMUIComponent: Story = {
+  args: {
+    name: 'first-name',
+    id: 'first-name',
+    autoComplete: 'off',
+    value: "kevin",
+    disabled: false,
+    error: false,
+    fullWidth: false,
+    helperText: 'please type your first name',
+    label: 'First name',
+    placeholder: 'First name',
+    required: true,
+    type: 'text',
+    onChange: (e) => {
+      console.log(e.target.value)
+    },
+    styleOverrides: {
+      root: {
+        color: '#34fc26',
+        fontSize: '20px',
+        backgroundColor: '#faa0e8'
+      },
+      label: {
+        color: 'black',
+        fontSize: '30px',
+        backgroundColor: '#ff293b'
+      },
+      input: {
+        color: 'green',
+        fontSize: '20px',
+        backgroundColor: '#29eaff',
+      }
+    },
+    useWebComponent: false
+  },
+};

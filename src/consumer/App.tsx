@@ -2,7 +2,11 @@ import React from "react";
 import {TextInput} from "../components/public/TextInput";
 import {useTheme, AppThemeContext} from "./useTheme";
 
-const App = () => {
+interface AppProps {
+  useWebComponent?: boolean;
+}
+
+const App: React.FC<AppProps> = ({useWebComponent}) => {
   const theme = useTheme();
 
   return (
@@ -21,6 +25,7 @@ const App = () => {
         required={true}
         type='text'
         color="primary"
+        useWebComponent={useWebComponent}
       />
     </AppThemeContext.Provider>
   )

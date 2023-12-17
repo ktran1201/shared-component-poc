@@ -1,6 +1,7 @@
 import React from "react";
 import {TextInput} from "../components/public/TextInput";
-import {useTheme, AppThemeContext} from "./useTheme";
+import {useTheme} from "./useTheme";
+import {ShareComponentsThemeContext} from '../theme'
 
 interface AppProps {
   useWebComponent?: boolean;
@@ -11,7 +12,7 @@ const App: React.FC<AppProps> = ({useWebComponent, usePrimaryColor}) => {
   const theme = useTheme();
 
   return (
-    <AppThemeContext.Provider value={theme}>
+    <ShareComponentsThemeContext.Provider value={theme}>
       <TextInput
         name='first-name'
         id='first-name'
@@ -28,7 +29,7 @@ const App: React.FC<AppProps> = ({useWebComponent, usePrimaryColor}) => {
         color={usePrimaryColor ? "primary" : "secondary"}
         useWebComponent={useWebComponent}
       />
-    </AppThemeContext.Provider>
+    </ShareComponentsThemeContext.Provider>
   )
 };
 

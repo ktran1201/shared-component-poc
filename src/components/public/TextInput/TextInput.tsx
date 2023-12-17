@@ -5,7 +5,7 @@ import {
   $defaultColor,
   $defaultFontSize
 } from "../../private/WebTextInput/WebTextInput";
-import {AppThemeContext} from "../../../consumer/useTheme";
+import {ShareComponentsThemeContext} from "../../../theme";
 
 interface StyleOverrides {
   color: string;
@@ -71,7 +71,7 @@ const TextInput: React.FC<TextInputProps> = ({
   color,
                                                useWebComponent,
 }) => {
-  const theme = useContext(AppThemeContext);
+  const theme = useContext(ShareComponentsThemeContext);
   console.log("theme", theme)
   const colorValue = theme?.color?.[color];
   if (useWebComponent) {

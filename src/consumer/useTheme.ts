@@ -1,6 +1,4 @@
-import {createContext, useEffect, useState} from 'react';
-
-export const AppThemeContext = createContext({});
+import {useEffect, useState} from 'react';
 
 const appTheme = {
   color: {

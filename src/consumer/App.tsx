@@ -17,7 +17,7 @@ const App: React.FC<AppProps> = ({useWebComponent, usePrimaryColor}) => {
         name='first-name'
         id='first-name'
         autoComplete = 'off'
-        value = "kevin"
+        value = "Upstart"
         disabled ={false}
         error={false}
         fullWidth={false}

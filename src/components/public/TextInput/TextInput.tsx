@@ -69,10 +69,10 @@ const TextInput: React.FC<TextInputProps> = ({
   styleOverrides,
   textOverrides,
   color,
-                                               useWebComponent,
+  useWebComponent,
 }) => {
   const theme = useContext(ShareComponentsThemeContext);
-  console.log("theme", theme)
+
   const colorValue = theme?.color?.[color];
   if (useWebComponent) {
     return (
@@ -124,8 +124,6 @@ const TextInput: React.FC<TextInputProps> = ({
     }
   }
 
-  console.log("sx", sx)
-
   return <TextField
     name={name}
     id={id}
@@ -141,7 +139,6 @@ const TextInput: React.FC<TextInputProps> = ({
     type={type}
     onChange={onChange}
     sx={sx}
-    color="warning"
   />
 };
 

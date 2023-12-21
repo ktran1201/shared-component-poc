@@ -1,0 +1,17 @@
+@use 'styles/mixins' as *;
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+
+  svg {
+    fill: $colorPrimaryDark;
+  }
+}
+
+.withOverlay {
+  background-color: rgba(0, 0, 0, 0.3);
+}

@@ -1,11 +1,6 @@
-import React, {ChangeEvent, useContext} from "react";
-import WebTextInput from "../../private/WebTextInput";
-import {TextField} from "@mui/material";
-import {
-  $defaultColor,
-  $defaultFontSize
-} from "../../private/WebTextInput/WebTextInput";
+import React, {ChangeEvent, HTMLInputTypeAttribute, ReactNode, useContext} from "react";
 import {ShareComponentsThemeContext} from "../../../theme";
+import {PrivateTextInput} from "../../private/PrivateTextInput";
 
 interface StyleOverrides {
   color: string;
@@ -33,15 +28,11 @@ interface TextInputProps {
    * Error message can be provided via `helperText`
    */
   error?: boolean;
-  fullWidth?: boolean;
   helperText?: string;
   label?: string;
   placeholder?: string;
   required?: boolean;
-  /**
-   * currently support only text and number
-   */
-  type?: 'text' | 'number';
+  type?: HTMLInputTypeAttribute | undefined | 'currency';
 
   styleOverrides?: TextInputStyleOverrides;
   textOverrides?: TextInputTextOverrides;
@@ -49,7 +40,16 @@ interface TextInputProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 
   color: string
-  useWebComponent?: boolean;
+
+  // PrivateTextInput props
+  toUpperCase?: boolean;
+  hyperlinkElement?: any;
+  appendComponent?: ReactNode;
+  prependComponent?: ReactNode;
+  editButton?: React.ReactNode;
+  setCurrencyValue?: (value: string | undefined) => void;
+  maxLength?: number;
+  isLoading?: boolean;
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -69,77 +69,51 @@ const TextInput: React.FC<TextInputProps> = ({
   styleOverrides,
   textOverrides,
   color,
-  useWebComponent,
+
+  toUpperCase,
+  hyperlinkElement,
+  appendComponent,
+  prependComponent,
+  editButton,
+  setCurrencyValue,
+  maxLength,
+  isLoading,
 }) => {
   const theme = useContext(ShareComponentsThemeContext);
 
   const colorValue = theme?.color?.[color];
-  if (useWebComponent) {
-    return (
-      <>
-        <WebTextInput
-          name={name}
-          id={id}
-          autoComplete={autoComplete}
-          value={value}
-          disabled={disabled}
-          error={error}
-          fullWidth={fullWidth}
-          helperText={helperText}
-          label={label}
-          placeholder={placeholder}
-          isRequired={required}
-          type={type}
-          onChange={onChange}
-          styleOverrides={styleOverrides}
-          textOverrides={textOverrides}
-          color={colorValue}
-        />
-      </>
+  return (
+    <>
+      <PrivateTextInput
+        name={name}
+        id={id}
+        autoComplete={autoComplete}
+        value={value}
+        disabled={disabled}
+        error={error}
+        fullWidth={fullWidth}
+        helperText={helperText}
+        label={label}
+        placeholder={placeholder}
+        isRequired={required}
+        type={type}
+        onChange={onChange}
+        styleOverrides={styleOverrides}
+        textOverrides={textOverrides}
+        color={colorValue}
 
-    );
-  }
+        toUpperCase={toUpperCase}
+        hyperlinkElement={hyperlinkElement}
+        appendComponent={appendComponent}
+        prependComponent={prependComponent}
+        editButton={editButton}
+        setCurrencyValue={setCurrencyValue}
+        maxLength={maxLength}
+        isLoading={isLoading}
+      />
+    </>
 
-
-  const { root: rootStyleOverrides, label: labelStyleOverrides, input: inputStyleOverrides} = styleOverrides || {};
-  const { label: labelTextOverrides} = textOverrides || {};
-
-  const sx = {
-    color: rootStyleOverrides?.color || colorValue || $defaultColor,
-    fontSize: rootStyleOverrides?.fontSize || $defaultFontSize,
-
-    '& .MuiFormLabel-root': {
-      color: labelStyleOverrides?.color || colorValue || $defaultColor,
-      fontSize: labelStyleOverrides?.fontSize || $defaultFontSize,
-    },
-
-    '& .MuiInputBase-root': {
-      color: inputStyleOverrides?.color || colorValue || $defaultColor,
-      fontSize: inputStyleOverrides?.fontSize || $defaultFontSize,
-    },
-
-    '& .MuiFormHelperText-root': {
-      color: rootStyleOverrides?.color || colorValue || $defaultColor,
-      fontSize: rootStyleOverrides?.fontSize || $defaultFontSize,
-    }
-  }
-
-  return <TextField
-    name={name}
-    id={id}
-    autoComplete={autoComplete}
-    value={value}
-    disabled={disabled}
-    error={error}
-    fullWidth={fullWidth}
-    helperText={helperText}
-    label={labelTextOverrides || label}
-    placeholder={placeholder}
-    isRequired={required}
-    type={type}
-    onChange={onChange}
-    sx={sx}
-  />
+  );
 };
 
 export default TextInput;

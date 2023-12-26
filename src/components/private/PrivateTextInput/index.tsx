@@ -17,7 +17,7 @@ import { FieldLabel } from '../FieldLabel';
 import { Loader, LoaderSize } from '../Loader';
 import {HTMLProps} from "../../../utils/htmlProps";
 
-export interface TextInputProps
+export interface PrivateTextInputProps
   extends HTMLProps<
       'input',
       | 'name'
@@ -36,15 +36,15 @@ export interface TextInputProps
   // Name is our main identifier for property the value will map to
   error?: string;
   type?: HTMLInputTypeAttribute | undefined | 'currency';
-  size?: 'md' | 'lg';
+  // size?: 'md' | 'lg';
   label?: string;
   tooltip?: string;
   helperText?: string;
   disabled?: boolean;
-  inputClassName?: string;
-  containerClassName?: string;
-  labelClassName?: string;
-  inputContainerClassName?: string;
+  // inputClassName?: string;
+  // containerClassName?: string;
+  // labelClassName?: string;
+  // inputContainerClassName?: string;
   toUpperCase?: boolean;
   isLoading?: boolean;
   isRequired?: boolean;
@@ -52,30 +52,30 @@ export interface TextInputProps
   appendComponent?: ReactNode;
   prependComponent?: ReactNode;
   editButton?: React.ReactNode;
-  fullWidth?: boolean;
+  // fullWidth?: boolean;
   setCurrencyValue?: (value: string | undefined) => void;
 }
 
-export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
+export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextInputProps>(
   (
     {
       label = '',
       type = 'text',
-      size = 'md',
+      // size = 'md',
       // tooltip,
       helperText,
       error = '',
       onChange: _onChange,
-      inputClassName = '',
-      containerClassName,
-      labelClassName = '',
+      // inputClassName = '',
+      // containerClassName,
+      // labelClassName = '',
       toUpperCase,
       isLoading,
       isRequired = false,
       hyperlinkElement,
       appendComponent,
       prependComponent,
-      inputContainerClassName,
+      // inputContainerClassName,
       editButton,
       fullWidth,
       dataTestId,
@@ -105,10 +105,12 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
 
     const inputProps = {
       id,
-      className: classNames(styles.input, inputClassName, {
-        [styles.inputError]: !!error,
-        [styles.sizeLarge]: size === 'lg',
-      }),
+      className: classNames(styles.input,
+        // inputClassName,
+        {
+          [styles.inputError]: !!error,
+          // [styles.sizeLarge]: size === 'lg',
+        }),
       type,
       onChange,
       ref,
@@ -123,8 +125,8 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         data-test-id={`${dataTestId}-text-input-container`}
         className={classNames(
           styles.textInputContainer,
-          containerClassName,
-          fullWidth ? 'fullWidth' : '',
+          // containerClassName,
+          // fullWidth ? 'fullWidth' : '',
         )}
       >
         <div className={styles.header}>
@@ -136,7 +138,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
               className={classNames(
                 styles.label,
                 error ? styles.labelError : '',
-                labelClassName,
+                // labelClassName,
               )}
             >
               <FieldLabel isRequired={isRequired} label={label} />
@@ -147,7 +149,9 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         </div>
 
         <div
-          className={classNames(inputContainerClassName, styles.inputContainer)}
+          className={classNames(
+            // inputContainerClassName,
+            styles.inputContainer)}
         >
           {prependComponent && (
             <div
@@ -197,7 +201,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
   },
 );
 
-TextInput.displayName = 'TextInput';
+PrivateTextInput.displayName = 'PrivateTextInput';
 
 /**
  * Custom hook to calculate prepended / appending component widths to be able to

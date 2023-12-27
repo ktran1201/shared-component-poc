@@ -3,14 +3,16 @@ import {Color, Size} from "../../../theme";
 import {PrivateTextInput} from "../../private/PrivateTextInput";
 
 interface StyleOverrides {
-  color: string;
-  fontSize: string;
+  color?: string;
+  fontSize?: string;
+  width?: string;
 }
 
 export interface TextInputStyleOverrides {
   root: StyleOverrides;
   label: StyleOverrides;
   input: StyleOverrides;
+  helperText: StyleOverrides;
 }
 
 export interface TextInputTextOverrides {

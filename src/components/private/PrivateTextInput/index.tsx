@@ -60,6 +60,17 @@ export interface PrivateTextInputProps
   fontSize?: Size;
 }
 
+interface OverrideProps {
+  styleOverrides?: {
+    color?: string;
+    fontSize?: string;
+    width?: string;
+  },
+  color?: string;
+  fontSize?: string;
+  error?: string;
+}
+
 const $colorBlackMed = 'rgba(51, 51, 51, 0.6)';
 const $colorPrimaryDark = '#1a6664';
 const $colorErrorDark = '#d71974';
@@ -105,7 +116,7 @@ const $input = `
   }
 `
 
-const StyledCurrencyInput = styled(CurrencyInput)<PrivateTextInputProps>`
+const StyledCurrencyInput = styled(CurrencyInput)<OverrideProps>`
   ${$input}
   
   color: ${(props) => (props.styleOverrides?.color || props.color || '#000000')};
@@ -114,7 +125,7 @@ const StyledCurrencyInput = styled(CurrencyInput)<PrivateTextInputProps>`
   ${props => props.error && `border-color: ${$colorErrorDark};`  }
 `;
 
-const Input = styled.input<PrivateTextInputProps>`
+const Input = styled.input<OverrideProps>`
   ${$input}
   
   color: ${(props) => (props.styleOverrides?.color || props.color || '#000000')};
@@ -123,7 +134,7 @@ const Input = styled.input<PrivateTextInputProps>`
   ${props => props.error && `border-color: ${$colorErrorDark};`  }
 `;
 
-const Label = styled.label<PrivateTextInputProps>`
+const Label = styled.label<OverrideProps>`
   color: ${(props) => (props.styleOverrides?.color || props.color || $colorBlackMed)};
   font-size: ${(props) => (props.styleOverrides?.fontSize || props.fontSize || '12px')};
   margin-bottom: 8px;
@@ -131,7 +142,7 @@ const Label = styled.label<PrivateTextInputProps>`
 `;
 
 
-const HelperText = styled.div<PrivateTextInputProps>`
+const HelperText = styled.div<OverrideProps>`
   margin: 2px 0px 0px;
   height: 12px;
   width: 100%;
@@ -143,7 +154,7 @@ const HelperText = styled.div<PrivateTextInputProps>`
 `;
 
 
-const StyledPrivateTextInput = styled.div<PrivateTextInputProps>`
+const StyledPrivateTextInput = styled.div<OverrideProps>`
   display: flex;
   flex-direction: column;
   ${props => props.styleOverrides?.width && `width: ${props.styleOverrides?.width};`}
@@ -174,8 +185,6 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
       appendComponent,
       prependComponent,
       editButton,
-      fullWidth,
-      dataTestId,
       setCurrencyValue,
       styleOverrides = {},
       textOverrides = {},
@@ -189,8 +198,8 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
     const { label: labelTextOverrides} = textOverrides;
 
     const theme = useContext(ShareComponentsThemeContext);
-    const colorValue = theme?.colors?.[color];
-    const fontSizeValue = theme?.fontSizes?.[fontSize];
+    const colorValue = theme?.colors?.[color || 'primary'];
+    const fontSizeValue = theme?.fontSizes?.[fontSize || 'md'];
 
     const id = React.useId();
     const { setPrependComponentRef, setAppendComponentRef, inlineInputStyles } =
@@ -216,7 +225,7 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
       type,
       onChange,
       ref,
-      'data-test-id': `${dataTestId}-text-input`,
+      'data-test-id': `${id}-text-input`,
       style: inlineInputStyles,
       ...props,
       'aria-describedby': `${id}-error-helper`,
@@ -228,14 +237,14 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
 
     return (
       <StyledPrivateTextInput
-        data-test-id={`${dataTestId}-text-input-container`}
+        data-test-id={`${id}-text-input-container`}
         styleOverrides={rootStyleOverrides}
       >
         <div className={styles.header}>
           {label && (
             // eslint-disable-next-line jsx-a11y/label-has-associated-control
             <Label
-              data-test-id={`${dataTestId}-text-input-label`}
+              data-test-id={`${id}-text-input-label`}
               htmlFor={id}
               styleOverrides={labelStyleOverrides}
               error={error}
@@ -287,7 +296,7 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
         {(error || helperText) && (
           <HelperText
             id={`${id}-error-helper`}
-            data-test-id={`${dataTestId}-text-input-error-helper`}
+            data-test-id={`${id}-text-input-error-helper`}
             error={error}
             styleOverrides={helperTextStyleOverrides}
             color={colorValue}

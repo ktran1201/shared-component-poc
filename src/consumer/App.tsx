@@ -5,10 +5,10 @@ import {Color, ShareComponentsThemeContext, Size} from '../theme'
 
 interface AppProps {
   color?: Color;
-  size?: Size;
+  fontSize?: Size;
 }
 
-const App: React.FC<AppProps> = ({color, size}) => {
+const App: React.FC<AppProps> = ({color, fontSize}) => {
   const theme = useTheme();
 
   return (
@@ -27,7 +27,7 @@ const App: React.FC<AppProps> = ({color, size}) => {
         required={true}
         type='text'
         color={color}
-        size={size}
+        fontSize={fontSize}
       />
     </ShareComponentsThemeContext.Provider>
   )

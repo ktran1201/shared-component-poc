@@ -40,7 +40,7 @@ interface TextInputProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 
   color?: Color;
-  size?: Size;
+  fontSize?: Size;
 
   // PrivateTextInput props
   toUpperCase?: boolean;
@@ -69,7 +69,7 @@ const TextInput: React.FC<TextInputProps> = ({
   styleOverrides,
   textOverrides,
   color,
-  size,
+  fontSize,
 
   toUpperCase,
   hyperlinkElement,
@@ -100,7 +100,7 @@ const TextInput: React.FC<TextInputProps> = ({
         styleOverrides={styleOverrides}
         textOverrides={textOverrides}
         color={color}
-        size={size}
+        fontSize={fontSize}
 
         toUpperCase={toUpperCase}
         hyperlinkElement={hyperlinkElement}

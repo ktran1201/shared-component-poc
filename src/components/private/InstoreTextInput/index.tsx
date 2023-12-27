@@ -9,40 +9,41 @@ import React, {
 
 import classNames from 'classnames';
 import CurrencyInput from 'react-currency-input-field';
-
-import styles from './TextInput.module.scss';
-
 import {HTMLProps} from "../../../utils/htmlProps";
-import {TextInputStyleOverrides, TextInputTextOverrides} from "../../public/TextInput/TextInput";
-import styled from "styled-components";
 import Loader, {LoaderSize} from "../Loader";
 import FieldLabel from "../FieldLabel";
 import ErrorMessage from "../ErrorMessage";
-import chroma from "chroma-js";
 
-export interface PrivateTextInputProps
+import styles from './TextInput.module.scss';
+
+export interface InstoreTextInputProps
   extends HTMLProps<
-      'input',
-      | 'name'
-      | 'placeholder'
-      | 'autoComplete'
-      | 'id'
-      | 'onKeyDown'
-      | 'onBlur'
-      | 'onChange'
-      | 'value'
-      | 'disabled'
-      | 'maxLength'
-      | 'minLength'
+    'input',
+    | 'name'
+    | 'placeholder'
+    | 'autoComplete'
+    | 'id'
+    | 'onKeyDown'
+    | 'onBlur'
+    | 'onChange'
+    | 'value'
+    | 'disabled'
+    | 'maxLength'
+    | 'minLength'
     >,
     DataTestId {
   // Name is our main identifier for property the value will map to
   error?: string;
   type?: HTMLInputTypeAttribute | undefined | 'currency';
+  size?: 'md' | 'lg';
   label?: string;
   tooltip?: string;
   helperText?: string;
   disabled?: boolean;
+  inputClassName?: string;
+  containerClassName?: string;
+  labelClassName?: string;
+  inputContainerClassName?: string;
   toUpperCase?: boolean;
   isLoading?: boolean;
   isRequired?: boolean;
@@ -50,147 +51,38 @@ export interface PrivateTextInputProps
   appendComponent?: ReactNode;
   prependComponent?: ReactNode;
   editButton?: React.ReactNode;
+  fullWidth?: boolean;
   setCurrencyValue?: (value: string | undefined) => void;
-
-  styleOverrides?: TextInputStyleOverrides;
-  textOverrides?: TextInputTextOverrides;
 }
 
-// TODO: generate these colors in the way that scss did
-const $colorBlackMed = 'rgba(51, 51, 51, 0.6)';
-const $colorPrimaryDark = '#1a6664';
-const $colorErrorDark = '#d71974';
-const $colorInputBorderGrey = '#919191';
-const $colorBlackLight = 'rgba(51, 51, 51, 0.38)';
-
-// const $colorPrimaryMed = hsl(
-//   $hue: hue($colorPrimaryDark),
-//   $saturation: 42%,
-//   $lightness: 36%,
-// );
-
-const $colorPrimaryMed = chroma.hsl(chroma($colorPrimaryDark).hsl()[0], 0.42, 0.36).hex();
-
-const $inputErrorLabel = `
-  color: ${$colorErrorDark};
-  font-size: 10px;
-  opacity: 1;
-`;
-
-const $input = `
-  width: 100%;
-  border-radius: 8px;
-  border: 1px solid ${$colorInputBorderGrey};
-  padding: 8px 16px;
-  font-size: 16px;
-
-  &.sizeLarge {
-    padding: 12px;
-    line-height: 24px;
-  }
-
-  &::placeholder {
-    color: ${$colorBlackLight};
-  }
-
-  &:focus {
-    outline: transparent;
-    border-color: ${$colorPrimaryMed};
-  }
-
-  &:disabled {
-    color: ${$colorBlackLight};
-  }
-
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-`
-
-const StyledCurrencyInput = styled(CurrencyInput)<PrivateTextInputProps>`
-  ${$input}
-  ${props => props.styleOverrides?.color && `color: ${props.styleOverrides?.color}; `  }
-  ${props => props.styleOverrides?.fontSize && `font-size: ${props.styleOverrides?.fontSize};`  }
-  ${props => props.error && `border-color: ${$colorErrorDark};`  }
-`;
-
-const Input = styled.input<PrivateTextInputProps>`
-  ${$input}
-  
-  ${props => props.styleOverrides?.color && `color: ${props.styleOverrides?.color}; `  }
-  ${props => props.styleOverrides?.fontSize && `font-size: ${props.styleOverrides?.fontSize};`  }
-  ${props => props.error && `border-color: ${$colorErrorDark};`  }
-`;
-
-const Label = styled.label<PrivateTextInputProps>`
-  font-size: 12px;
-  color: ${$colorBlackMed};
-  margin-bottom: 8px;
-  ${props => props.styleOverrides?.color && `color: ${props.styleOverrides?.color}; `  }
-  ${props => props.styleOverrides?.fontSize && `font-size: ${props.styleOverrides?.fontSize};`  }
-  ${props => props.error && `${$inputErrorLabel}`  }
-`;
-
-
-const HelperText = styled.div<PrivateTextInputProps>`
-  margin: 2px 0px 0px;
-  height: 12px;
-  width: 100%;
-  font-size: 10px;
-  opacity: 1;
-  color: ${$colorBlackMed};
-  transition: opacity 0.2s;
-  ${props => props.styleOverrides?.color && `color: ${props.styleOverrides?.color}; `  }
-  ${props => props.styleOverrides?.fontSize && `font-size: ${props.styleOverrides?.fontSize};`  }
-  ${props => props.error && `${$inputErrorLabel}`  }
-`;
-
-
-const StyledPrivateTextInput = styled.div<PrivateTextInputProps>`
-  display: flex;
-  flex-direction: column;
-  ${props => props.styleOverrides?.width && `width: ${props.styleOverrides?.width};`}
-  
-  &:focus-within {
-    ${HelperText} {
-      opacity: 1;
-    }
-    
-    ${Label} {
-      color: ${$colorPrimaryMed};
-    }
-  }
-`;
-
-export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextInputProps>(
+export const InstoreTextInput = React.forwardRef<HTMLInputElement, InstoreTextInputProps>(
   (
     {
       label = '',
       type = 'text',
+      size = 'md',
+      // tooltip,
       helperText,
       error = '',
       onChange: _onChange,
+      inputClassName = '',
+      containerClassName,
+      labelClassName = '',
       toUpperCase,
       isLoading,
       isRequired = false,
       hyperlinkElement,
       appendComponent,
       prependComponent,
+      inputContainerClassName,
       editButton,
       fullWidth,
       dataTestId,
       setCurrencyValue,
-      styleOverrides = {},
-      textOverrides = {},
       ...props
     },
     ref,
   ) => {
-    const { root: rootStyleOverrides, label: labelStyleOverrides, input: inputStyleOverrides, helperText: helperTextStyleOverrides} = styleOverrides;
-    const { label: labelTextOverrides} = textOverrides;
-
     const id = React.useId();
     const { setPrependComponentRef, setAppendComponentRef, inlineInputStyles } =
       useInlineComponents();
@@ -212,6 +104,10 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
 
     const inputProps = {
       id,
+      className: classNames(styles.input, inputClassName, {
+        [styles.inputError]: !!error,
+        [styles.sizeLarge]: size === 'lg',
+      }),
       type,
       onChange,
       ref,
@@ -219,35 +115,38 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
       style: inlineInputStyles,
       ...props,
       'aria-describedby': `${id}-error-helper`,
-      error,
-      styleOverrides: inputStyleOverrides
     };
 
     return (
-      <StyledPrivateTextInput
+      <div
         data-test-id={`${dataTestId}-text-input-container`}
-        styleOverrides={rootStyleOverrides}
+        className={classNames(
+          styles.textInputContainer,
+          containerClassName,
+          fullWidth ? 'fullWidth' : '',
+        )}
       >
         <div className={styles.header}>
           {label && (
             // eslint-disable-next-line jsx-a11y/label-has-associated-control
-            <Label
+            <label
               data-test-id={`${dataTestId}-text-input-label`}
               htmlFor={id}
-              styleOverrides={labelStyleOverrides}
-              error={error}
-              className={styles.label}
+              className={classNames(
+                styles.label,
+                error ? styles.labelError : '',
+                labelClassName,
+              )}
             >
               <FieldLabel isRequired={isRequired} label={label} />
               {/** tooltip && <Tooltip text={tooltip} ariaLabel={name} /> */}
-            </Label>
+            </label>
           )}
           {editButton}
         </div>
 
         <div
-          className={classNames(
-            styles.inputContainer)}
+          className={classNames(inputContainerClassName, styles.inputContainer)}
         >
           {prependComponent && (
             <div
@@ -258,7 +157,7 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
             </div>
           )}
           {type === 'currency' && !!setCurrencyValue ? (
-            <StyledCurrencyInput
+            <CurrencyInput
               name="input-name"
               decimalsLimit={2}
               prefix="$"
@@ -266,7 +165,7 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
               {...inputProps}
             />
           ) : (
-            <Input {...inputProps} />
+            <input {...inputProps} />
           )}
           {(appendComponent || isLoading) && (
             <div
@@ -280,22 +179,24 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
         </div>
 
         {(error || helperText) && (
-          <HelperText
+          <div
             id={`${id}-error-helper`}
             data-test-id={`${dataTestId}-text-input-error-helper`}
-            error={error}
-            styleOverrides={helperTextStyleOverrides}
+            className={classNames(
+              styles.helperText,
+              error ? styles.fieldError : '',
+            )}
           >
             {error ? <ErrorMessage message={error} /> : helperText}
-          </HelperText>
+          </div>
         )}
         {!(error || helperText) && hyperlinkElement}
-      </StyledPrivateTextInput>
+      </div>
     );
   },
 );
 
-PrivateTextInput.displayName = 'PrivateTextInput';
+InstoreTextInput.displayName = 'TextInput';
 
 /**
  * Custom hook to calculate prepended / appending component widths to be able to

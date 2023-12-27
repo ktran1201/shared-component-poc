@@ -1,0 +1,293 @@
+@use 'sass:color';
+
+$colorPrimaryDark: #1a6664;
+$colorSuccessDark: #409c64;
+$colorInfoDark: #0765f9;
+$colorWarnDark: #f77c01;
+$colorErrorDark: #d71974;
+$colorLightBlue: #03a9f4;
+
+$colorDefaultGrey: #d4d4d4;
+$colorInputBorderGrey: #919191;
+$colorDivider: #0000001f;
+
+$colorItemBorderGrey: #d9d9d9;
+$charcoal: #444444;
+$borderRadiusMed: 10px;
+
+$colorSecondary: #0082ec;
+
+// Dynamically Generated Color Variants
+$colorPrimaryMed: hsl(
+  $hue: hue($colorPrimaryDark),
+  $saturation: 42%,
+  $lightness: 36%,
+);
+$colorPrimaryLight: hsl(
+  $hue: hue($colorPrimaryDark),
+  $saturation: 55%,
+  $lightness: 93%,
+);
+$colorSuccessLight: hsl(
+  $hue: hue($colorSuccessDark),
+  $saturation: 60%,
+  $lightness: 95%,
+);
+$colorErrorLight: hsl(
+  $hue: hue($colorErrorDark),
+  $saturation: 100%,
+  $lightness: 97%,
+);
+$colorWarnLight: hsl(
+  $hue: hue($colorWarnDark),
+  $saturation: 100%,
+  $lightness: 94%,
+);
+$colorInfoLight: hsl(
+  $hue: hue($colorInfoDark),
+  $saturation: 45%,
+  $lightness: 96%,
+);
+
+// Button
+$buttonRadius: 8px;
+$primaryColorDarkHover: hsl(
+  $hue: hue($colorPrimaryDark),
+  $saturation: 80%,
+  $lightness: 17%,
+);
+$primaryColorDarkActive: hsl(
+  $hue: hue($colorPrimaryDark),
+  $saturation: 65%,
+  $lightness: 25%,
+);
+$secondaryColorActiveBG: hsl(
+  $hue: hue($colorPrimaryDark),
+  $saturation: 55%,
+  $lightness: 93%,
+);
+$secondaryColorActiveBorder: hsl(
+  $hue: hue($colorPrimaryDark),
+  $saturation: 42%,
+  $lightness: 43%,
+);
+
+$colorWhiteDark: #dfdfdf;
+$colorWhiteMed: #f4f4f4;
+$colorWhiteLight: #fefefe;
+$colorWhiteUltraLight: #ffffff;
+$colorWhiteUltraLightOpaque: rgba(255, 255, 255, 0.5);
+
+$colorDisabled: #dddddd;
+
+$colorBlackDark: #333333;
+$colorBlackMed: rgba(#333333, 0.6);
+$colorBlackLight: rgba(#333333, 0.38);
+
+$colorGreyDark: rgba(#333333, 0.8);
+$colorGreyMed: #989898;
+$colorGreyLight: #f4f4f4;
+
+$boxShadowCard: 0px 4px 10px $colorDefaultGrey;
+$boxShadowLight: 0px 4px 10px $colorGreyMed;
+$boxShadowUltraLight: 0px 1px 4px 1px $colorWhiteDark;
+$tableRowBoxShadow: color.adjust($colorPrimaryMed, $alpha: -0.9);
+
+$fontFacePrimary: 'Open Sans';
+$fontFacePrimaryBold: null;
+$fontFaceSecondary: 'Open Sans';
+
+$desktopHeaderHeight: 80px;
+$mobileHeaderHeight: 70px;
+
+$transitionDuration: 150ms;
+
+$mobileMaxWidthDefaultValue: 768;
+$tabletMaxWidthDefaultValue: 1000;
+$tabletMaxWidthBrowseValue: 1100;
+$largeTabletMaxWidthBrowseValue: 1200;
+$browseAccessoryBreakpointValue: 1280;
+$largeScreenBreakpointValue: 1650;
+
+$mobileMaxWidthDefault: $mobileMaxWidthDefaultValue + px;
+$tabletMaxWidthDefault: $tabletMaxWidthDefaultValue + px;
+$tabletMaxWidthBrowse: $tabletMaxWidthBrowseValue + px;
+$largeTabletMaxWidthBrowse: $largeTabletMaxWidthBrowseValue + px;
+$browseAccessoryBreakpoint: $browseAccessoryBreakpointValue + px;
+$largeScreenBreakpoint: $largeScreenBreakpointValue + px;
+
+$mobileDealSummaryBarHeight: 106px;
+$mobileSmallSummaryBarHeight: 63px;
+
+$sliderTransitionTime: 200ms;
+
+$top-nav-height: 70px;
+$nav-footer-height: 100px;
+$main-padding: 10px;
+$salesPersonHome-buttons-container-height: 76px;
+$salesPersonHome-reviews-container-height: 200px;
+$carImageContainer-deal-summary-height: 110px;
+
+@mixin transition($x, $ms) {
+  transition: $x $ms;
+  -webkit-transition: $x $ms ease-out;
+  -moz-transition: $x $ms ease-out;
+  -ms-transition: $x $ms ease-out;
+  -o-transition: $x $ms ease-out;
+}
+
+@mixin panelBoxShadow {
+  -webkit-box-shadow: -4px 4px 6px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+@mixin applyFontFacePrimaryBold {
+  @if $fontFacePrimaryBold !=null {
+    font-family: $fontFacePrimaryBold;
+  } @else {
+    font-weight: bold;
+  }
+}
+
+@mixin ada-focus-outline {
+  &:focus-visible {
+    outline-style: solid;
+    outline-offset: 4px;
+    outline: 2px solid #015fcc;
+    border-radius: 4px;
+  }
+}
+
+@mixin with-always-visible-footer {
+  overflow-x: scroll;
+  height: calc(
+    100vh - ($top-nav-height + $nav-footer-height) - ($main-padding * 2)
+  );
+
+  @media screen and (max-width: $largeTabletMaxWidthBrowse) {
+    height: calc(
+      100vh - ($top-nav-height + $nav-footer-height + 48px) -
+        ($main-padding * 2)
+    );
+  }
+}
+
+@mixin form-max-width {
+  max-width: 543px;
+}
+
+@mixin form-width {
+  width: 543px;
+}
+
+@mixin five-column-inline-form {
+  display: grid;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 20px;
+  @include form-width;
+  @include form-max-width;
+  grid-template-columns: 1fr 1fr;
+  > div {
+    flex: 0 0 calc(20% - 20px);
+  }
+  > div:first-child {
+    margin-top: 20px;
+  }
+}
+
+@mixin two-column-inline-form {
+  display: grid;
+  gap: 20px;
+
+  grid-template-columns: 1fr 1fr;
+
+  margin-top: 20px;
+}
+
+@mixin six-column-inline-form {
+  display: grid;
+  gap: 20px;
+
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+  margin-top: 20px;
+}
+
+@mixin street-address-field {
+  flex: 0 0 calc(40% - 20px);
+}
+
+@mixin input-error-label {
+  color: $colorErrorDark;
+  font-size: 10px;
+  opacity: 1;
+}
+
+@mixin errored-border {
+  border: 1px solid $colorErrorDark;
+}
+
+// Bonus
+
+@mixin drop-shadow-md {
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.04))
+    drop-shadow(0 2px 2px rgb(0 0 0 / 0.02));
+}
+
+@mixin drop-shadow-lg {
+  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+    drop-shadow(0 4px 3px rgb(0 0 0 / 0.03));
+}
+
+// End of Bonus
+
+// Form Library
+
+$negativeRed: #d71974;
+$positiveGreen: $colorPrimaryMed;
+
+// End of Form Library
+
+// Assign css variable back to scss variable, this will make CSS variable and SCSS both work at the same time
+$colorPrimaryDark: var(--colorPrimaryDark, $colorPrimaryDark);
+$colorPrimaryMed: var(--colorPrimaryMed, $colorPrimaryMed);
+$colorPrimaryLight: var(--colorPrimaryLight, $colorPrimaryLight);
+$primaryColorDarkHover: var(--primaryColorDarkHover, $primaryColorDarkHover);
+$primaryColorDarkActive: var(--primaryColorDarkActive, $primaryColorDarkActive);
+$secondaryColorActiveBG: var(--secondaryColorActiveBG, $secondaryColorActiveBG);
+$secondaryColorActiveBorder: var(
+  --secondaryColorActiveBorder,
+  $secondaryColorActiveBorder
+);
+$tableRowBoxShadow: var(--tableRowBoxShadow, $tableRowBoxShadow);
+$colorErrorDark: var(--colorErrorDark, $colorErrorDark);
+$colorErrorLight: var(--colorErrorLight, $colorErrorLight);
+$colorInfoDark: var(--colorInfoDark, $colorInfoDark);
+$colorInfoLight: var(--colorInfoLight, $colorInfoLight);
+$colorSuccessDark: var(--colorSuccessDark, $colorSuccessDark);
+$colorSuccessLight: var(--colorSuccessLight, $colorSuccessLight);
+$buttonRadius: var(--buttonRadius, $buttonRadius);
+
+:export {
+  mobileMaxWidthDefault: $mobileMaxWidthDefault;
+  tabletMaxWidthDefault: $tabletMaxWidthDefault;
+  tabletMaxWidthBrowse: $tabletMaxWidthBrowse;
+  mobileMaxWidthDefaultValue: $mobileMaxWidthDefaultValue;
+  tabletMaxWidthDefaultValue: $tabletMaxWidthDefaultValue;
+  tabletMaxWidthBrowseValue: $tabletMaxWidthBrowseValue;
+  largeTabletMaxWidthBrowseValue: $largeTabletMaxWidthBrowseValue;
+  colorPrimaryDark: $colorPrimaryDark;
+  colorPrimaryMed: $colorPrimaryMed;
+  colorPrimaryLight: $colorPrimaryLight;
+  colorErrorDark: $colorErrorDark;
+  colorErrorLight: $colorErrorLight;
+  colorGreyMed: $colorGreyMed;
+
+  primaryColorDarkHover: $primaryColorDarkHover;
+  primaryColorDarkActive: $primaryColorDarkActive;
+  secondaryColorActiveBG: $secondaryColorActiveBG;
+  secondaryColorActiveBorder: $secondaryColorActiveBorder;
+  tableRowBoxShadow: $tableRowBoxShadow;
+  buttonRadius: $buttonRadius;
+}

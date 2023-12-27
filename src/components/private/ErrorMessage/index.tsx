@@ -9,7 +9,7 @@ interface ErrorMessageProps {
   className?: string;
 }
 
-export const ErrorMessage: React.FC<
+const ErrorMessage: React.FC<
   React.PropsWithChildren<ErrorMessageProps>
 > = ({ message, children, className }) => {
   return (
@@ -21,3 +21,5 @@ export const ErrorMessage: React.FC<
     </>
   );
 };
+
+export default ErrorMessage;

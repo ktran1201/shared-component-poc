@@ -23,7 +23,7 @@ const DIMENSIONS = {
   [LoaderSize.LARGE]: { height: 80, width: 80 },
 };
 
-export const Loader: React.FC<LoaderProps> = ({
+const Loader: React.FC<LoaderProps> = ({
   className,
   dataTestId = 'loader',
   size = LoaderSize.LARGE,
@@ -40,3 +40,5 @@ export const Loader: React.FC<LoaderProps> = ({
     <Circles {...DIMENSIONS[size]} />
   </div>
 );
+
+export default Loader;

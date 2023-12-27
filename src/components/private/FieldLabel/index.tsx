@@ -6,7 +6,7 @@ export interface Index {
   isRequired?: boolean;
 }
 
-export const FieldLabel: React.FC<Index> = ({ label, isRequired }) => {
+const FieldLabel: React.FC<Index> = ({ label, isRequired }) => {
   if (isRequired) {
     return (
       <>
@@ -16,3 +16,5 @@ export const FieldLabel: React.FC<Index> = ({ label, isRequired }) => {
   }
   return <>{label}</>;
 };
+
+export default FieldLabel;

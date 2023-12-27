@@ -59,7 +59,6 @@ const TextInput: React.FC<TextInputProps> = ({
   value,
   disabled,
   error,
-  fullWidth,
   helperText,
   label,
   placeholder,
@@ -90,9 +89,8 @@ const TextInput: React.FC<TextInputProps> = ({
         autoComplete={autoComplete}
         value={value}
         disabled={disabled}
-        error={error}
-        fullWidth={fullWidth}
-        helperText={helperText}
+        error={error ? helperText : ''}
+        helperText={!error ? helperText : ''}
         label={label}
         placeholder={placeholder}
         isRequired={required}

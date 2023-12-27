@@ -22,7 +22,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const useWebComponentDefault: Story = {
+export const defaultStory: Story = {
   args: {
     name: 'first-name',
     id: 'first-name',
@@ -30,7 +30,6 @@ export const useWebComponentDefault: Story = {
     value: "Upstart",
     disabled: false,
     error: false,
-    fullWidth: false,
     helperText: 'please type your first name',
     label: 'First name',
     placeholder: 'First name',
@@ -39,11 +38,10 @@ export const useWebComponentDefault: Story = {
     onChange: (e) => {
       console.log(e.target.value)
     },
-    useWebComponent: true
   },
 };
 
-export const useWebComponentOverride: Story = {
+export const withOverrides: Story = {
   args: {
     name: 'first-name',
     id: 'first-name',
@@ -51,67 +49,6 @@ export const useWebComponentOverride: Story = {
     value: "Upstart",
     disabled: false,
     error: false,
-    fullWidth: false,
-    helperText: 'please type your first name',
-    label: 'First name',
-    placeholder: 'First name',
-    required: true,
-    type: 'text',
-    onChange: (e) => {
-      console.log(e.target.value)
-    },
-    styleOverrides: {
-      root: {
-        color: 'purple',
-        fontSize: '14px',
-      },
-      label: {
-        color: 'red',
-        fontSize: '30px',
-      },
-      input: {
-        color: 'green',
-        fontSize: '20px',
-      }
-    },
-    textOverrides: {
-      label: 'first name (override)'
-    },
-    useWebComponent: true
-  },
-};
-
-
-export const useMUIComponentDefault: Story = {
-  args: {
-    name: 'first-name',
-    id: 'first-name',
-    autoComplete: 'off',
-    value: "Upstart",
-    disabled: false,
-    error: false,
-    fullWidth: false,
-    helperText: 'please type your first name',
-    label: 'First name',
-    placeholder: 'First name',
-    required: true,
-    type: 'text',
-    onChange: (e) => {
-      console.log(e.target.value)
-    },
-    useWebComponent: false
-  },
-};
-
-export const useMUIComponentOverride: Story = {
-  args: {
-    name: 'first-name',
-    id: 'first-name',
-    autoComplete: 'off',
-    value: "Upstart",
-    disabled: false,
-    error: false,
-    fullWidth: false,
     helperText: 'please type your first name',
     label: 'First name',
     placeholder: 'First name',
@@ -122,8 +59,7 @@ export const useMUIComponentOverride: Story = {
     },
     styleOverrides: {
       root: {
-        color: 'purple',
-        fontSize: '14px',
+        width: '100%'
       },
       label: {
         color: 'red',
@@ -132,11 +68,77 @@ export const useMUIComponentOverride: Story = {
       input: {
         color: 'green',
         fontSize: '20px',
+      },
+      helperText: {
+        color: 'blue',
+        fontSize: '18px',
       }
     },
     textOverrides: {
       label: 'first name (override)'
     },
-    useWebComponent: false
+    setCurrencyValue: (cur) => {
+      console.log('currency', cur)
+    },
   },
 };
+
+
+// export const useMUIComponentDefault: Story = {
+//   args: {
+//     name: 'first-name',
+//     id: 'first-name',
+//     autoComplete: 'off',
+//     value: "Upstart",
+//     disabled: false,
+//     error: false,
+//     fullWidth: false,
+//     helperText: 'please type your first name',
+//     label: 'First name',
+//     placeholder: 'First name',
+//     required: true,
+//     type: 'text',
+//     onChange: (e) => {
+//       console.log(e.target.value)
+//     },
+//     useWebComponent: false
+//   },
+// };
+//
+// export const useMUIComponentOverride: Story = {
+//   args: {
+//     name: 'first-name',
+//     id: 'first-name',
+//     autoComplete: 'off',
+//     value: "Upstart",
+//     disabled: false,
+//     error: false,
+//     fullWidth: false,
+//     helperText: 'please type your first name',
+//     label: 'First name',
+//     placeholder: 'First name',
+//     required: true,
+//     type: 'text',
+//     onChange: (e) => {
+//       console.log(e.target.value)
+//     },
+//     styleOverrides: {
+//       root: {
+//         color: 'purple',
+//         fontSize: '14px',
+//       },
+//       label: {
+//         color: 'red',
+//         fontSize: '30px',
+//       },
+//       input: {
+//         color: 'green',
+//         fontSize: '20px',
+//       }
+//     },
+//     textOverrides: {
+//       label: 'first name (override)'
+//     },
+//     useWebComponent: false
+//   },
+// };

@@ -1,5 +1,5 @@
-import React, {ChangeEvent, HTMLInputTypeAttribute, ReactNode, useContext} from "react";
-import {ShareComponentsThemeContext} from "../../../theme";
+import React, {ChangeEvent, HTMLInputTypeAttribute, ReactNode} from "react";
+import {Color, Size} from "../../../theme";
 import {PrivateTextInput} from "../../private/PrivateTextInput";
 
 interface StyleOverrides {
@@ -39,7 +39,8 @@ interface TextInputProps {
 
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 
-  color: string
+  color?: Color;
+  size?: Size;
 
   // PrivateTextInput props
   toUpperCase?: boolean;
@@ -68,6 +69,7 @@ const TextInput: React.FC<TextInputProps> = ({
   styleOverrides,
   textOverrides,
   color,
+  size,
 
   toUpperCase,
   hyperlinkElement,
@@ -78,9 +80,8 @@ const TextInput: React.FC<TextInputProps> = ({
   maxLength,
   isLoading,
 }) => {
-  const theme = useContext(ShareComponentsThemeContext);
 
-  const colorValue = theme?.color?.[color];
+
   return (
     <>
       <PrivateTextInput
@@ -98,7 +99,8 @@ const TextInput: React.FC<TextInputProps> = ({
         onChange={onChange}
         styleOverrides={styleOverrides}
         textOverrides={textOverrides}
-        color={colorValue}
+        color={color}
+        size={size}
 
         toUpperCase={toUpperCase}
         hyperlinkElement={hyperlinkElement}

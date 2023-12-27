@@ -2,7 +2,7 @@
 //! Todo ToolTips
 import React, {
   HTMLInputTypeAttribute,
-  ReactNode,
+  ReactNode, useContext,
   useMemo,
   useState,
 } from 'react';
@@ -19,6 +19,7 @@ import Loader, {LoaderSize} from "../Loader";
 import FieldLabel from "../FieldLabel";
 import ErrorMessage from "../ErrorMessage";
 import chroma from "chroma-js";
+import {Color, ShareComponentsThemeContext, Size} from "../../../theme";
 
 export interface PrivateTextInputProps
   extends HTMLProps<
@@ -54,20 +55,16 @@ export interface PrivateTextInputProps
 
   styleOverrides?: TextInputStyleOverrides;
   textOverrides?: TextInputTextOverrides;
+
+  color?: Color;
+  size?: Size;
 }
 
-// TODO: generate these colors in the way that scss did
 const $colorBlackMed = 'rgba(51, 51, 51, 0.6)';
 const $colorPrimaryDark = '#1a6664';
 const $colorErrorDark = '#d71974';
 const $colorInputBorderGrey = '#919191';
 const $colorBlackLight = 'rgba(51, 51, 51, 0.38)';
-
-// const $colorPrimaryMed = hsl(
-//   $hue: hue($colorPrimaryDark),
-//   $saturation: 42%,
-//   $lightness: 36%,
-// );
 
 const $colorPrimaryMed = chroma.hsl(chroma($colorPrimaryDark).hsl()[0], 0.42, 0.36).hex();
 
@@ -111,26 +108,27 @@ const $input = `
 
 const StyledCurrencyInput = styled(CurrencyInput)<PrivateTextInputProps>`
   ${$input}
-  ${props => props.styleOverrides?.color && `color: ${props.styleOverrides?.color}; `  }
-  ${props => props.styleOverrides?.fontSize && `font-size: ${props.styleOverrides?.fontSize};`  }
+  
+  color: ${(props) => (props.styleOverrides?.color || props.color || $colorBlackMed)};
+  font-size: ${(props) => (props.styleOverrides?.fontSize || props.fontSize || '12px')};
+  
   ${props => props.error && `border-color: ${$colorErrorDark};`  }
 `;
 
 const Input = styled.input<PrivateTextInputProps>`
   ${$input}
   
-  ${props => props.styleOverrides?.color && `color: ${props.styleOverrides?.color}; `  }
-  ${props => props.styleOverrides?.fontSize && `font-size: ${props.styleOverrides?.fontSize};`  }
+  color: ${(props) => (props.styleOverrides?.color || props.color || $colorBlackMed)};
+  font-size: ${(props) => (props.styleOverrides?.fontSize || props.fontSize || '12px')};
+  
   ${props => props.error && `border-color: ${$colorErrorDark};`  }
 `;
 
 const Label = styled.label<PrivateTextInputProps>`
-  font-size: 12px;
-  color: ${$colorBlackMed};
+  color: ${(props) => (props.styleOverrides?.color || props.color || $colorBlackMed)};
+  font-size: ${(props) => (props.styleOverrides?.fontSize || props.fontSize || '12px')};
   margin-bottom: 8px;
-  ${props => props.styleOverrides?.color && `color: ${props.styleOverrides?.color}; `  }
-  ${props => props.styleOverrides?.fontSize && `font-size: ${props.styleOverrides?.fontSize};`  }
-  ${props => props.error && `${$inputErrorLabel}`  }
+  ${props => props.error && `${$inputErrorLabel}`}
 `;
 
 
@@ -138,12 +136,10 @@ const HelperText = styled.div<PrivateTextInputProps>`
   margin: 2px 0px 0px;
   height: 12px;
   width: 100%;
-  font-size: 10px;
   opacity: 1;
-  color: ${$colorBlackMed};
   transition: opacity 0.2s;
-  ${props => props.styleOverrides?.color && `color: ${props.styleOverrides?.color}; `  }
-  ${props => props.styleOverrides?.fontSize && `font-size: ${props.styleOverrides?.fontSize};`  }
+  color: ${(props) => (props.styleOverrides?.color || props.color || $colorBlackMed)};
+  font-size: ${(props) => (props.styleOverrides?.fontSize || props.fontSize || '10px')};
   ${props => props.error && `${$inputErrorLabel}`  }
 `;
 
@@ -184,12 +180,18 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
       setCurrencyValue,
       styleOverrides = {},
       textOverrides = {},
+      color,
+      size,
       ...props
     },
     ref,
   ) => {
     const { root: rootStyleOverrides, label: labelStyleOverrides, input: inputStyleOverrides, helperText: helperTextStyleOverrides} = styleOverrides;
     const { label: labelTextOverrides} = textOverrides;
+
+    const theme = useContext(ShareComponentsThemeContext);
+    const colorValue = theme?.colors?.[color];
+    const fontSize = theme?.fontSizes?.[size];
 
     const id = React.useId();
     const { setPrependComponentRef, setAppendComponentRef, inlineInputStyles } =
@@ -220,7 +222,9 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
       ...props,
       'aria-describedby': `${id}-error-helper`,
       error,
-      styleOverrides: inputStyleOverrides
+      styleOverrides: inputStyleOverrides,
+      color: colorValue,
+      fontSize: fontSize
     };
 
     return (
@@ -237,8 +241,10 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
               styleOverrides={labelStyleOverrides}
               error={error}
               className={styles.label}
+              color={colorValue}
+              fontSize={fontSize}
             >
-              <FieldLabel isRequired={isRequired} label={label} />
+              <FieldLabel isRequired={isRequired} label={labelTextOverrides || label} />
               {/** tooltip && <Tooltip text={tooltip} ariaLabel={name} /> */}
             </Label>
           )}
@@ -285,6 +291,8 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
             data-test-id={`${dataTestId}-text-input-error-helper`}
             error={error}
             styleOverrides={helperTextStyleOverrides}
+            color={colorValue}
+            fontSize={fontSize}
           >
             {error ? <ErrorMessage message={error} /> : helperText}
           </HelperText>

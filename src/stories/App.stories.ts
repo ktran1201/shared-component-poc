@@ -14,7 +14,6 @@ const meta = {
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    backgroundColor: { control: 'color' },
   },
 } satisfies Meta<typeof App>;
 
@@ -24,13 +23,14 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const usePrimaryColor: Story = {
   args: {
-    usePrimaryColor: true
+    color: 'primary',
+    size: 'md',
   },
 };
 
-export const useSecondaryColor: Story = {
-  args: {
-    usePrimaryColor: false
-  },
-};
+// export const useSecondaryColor: Story = {
+//   args: {
+//     usePrimaryColor: false
+//   },
+// };
 

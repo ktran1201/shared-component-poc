@@ -14,7 +14,6 @@ const meta = {
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    backgroundColor: { control: 'color' },
   },
 } satisfies Meta<typeof TextInput>;
 
@@ -34,9 +33,13 @@ export const defaultStory: Story = {
     label: 'First name',
     placeholder: 'First name',
     required: true,
+    isLoading: false,
     type: 'text',
     onChange: (e) => {
       console.log(e.target.value)
+    },
+    setCurrencyValue: (cur) => {
+      console.log('currency', cur)
     },
   },
 };
@@ -53,6 +56,7 @@ export const withOverrides: Story = {
     label: 'First name',
     placeholder: 'First name',
     required: true,
+    isLoading: false,
     type: 'text',
     onChange: (e) => {
       console.log(e.target.value)

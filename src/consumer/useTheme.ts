@@ -1,9 +1,16 @@
 import {useEffect, useState} from 'react';
 
 const appTheme = {
-  color: {
+  colors: {
     primary: 'green',
     secondary: 'orange',
+  },
+  fontSizes: {
+    xs: '10px',
+    sm: '15px',
+    md: '20px',
+    lg: '25px',
+    xl: '30px',
   }
 }
 

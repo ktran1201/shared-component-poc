@@ -1,14 +1,14 @@
 import React from "react";
 import {TextInput} from "../components/public/TextInput";
 import {useTheme} from "./useTheme";
-import {ShareComponentsThemeContext} from '../theme'
+import {Color, ShareComponentsThemeContext, Size} from '../theme'
 
 interface AppProps {
-  useWebComponent?: boolean;
-  usePrimaryColor?: boolean;
+  color?: Color;
+  size?: Size;
 }
 
-const App: React.FC<AppProps> = ({useWebComponent, usePrimaryColor}) => {
+const App: React.FC<AppProps> = ({color, size}) => {
   const theme = useTheme();
 
   return (
@@ -26,8 +26,8 @@ const App: React.FC<AppProps> = ({useWebComponent, usePrimaryColor}) => {
         placeholder = 'First name'
         required={true}
         type='text'
-        color={usePrimaryColor ? "primary" : "secondary"}
-        useWebComponent={useWebComponent}
+        color={color}
+        size={size}
       />
     </ShareComponentsThemeContext.Provider>
   )

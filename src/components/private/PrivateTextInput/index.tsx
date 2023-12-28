@@ -198,8 +198,8 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
     const { label: labelTextOverrides} = textOverrides;
 
     const theme = useContext(ShareComponentsThemeContext);
-    const colorValue = theme?.colors?.[color || 'primary'];
-    const fontSizeValue = theme?.fontSizes?.[fontSize || 'md'];
+    const colorValue = theme?.colors?.[color || 'random'];
+    const fontSizeValue = theme?.fontSizes?.[fontSize || 'random'];
 
     const id = React.useId();
     const { setPrependComponentRef, setAppendComponentRef, inlineInputStyles } =

@@ -82,8 +82,6 @@ const TextInput: React.FC<TextInputProps> = ({
   maxLength,
   isLoading,
 }) => {
-
-
   return (
     <>
       <PrivateTextInput

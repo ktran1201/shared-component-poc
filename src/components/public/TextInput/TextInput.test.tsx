@@ -7,24 +7,68 @@ import {userEvent} from "@testing-library/user-event";
 describe('TextInput', () => {
   const onChangeSpy = vi.fn();
 
-  async function renderTest() {
+  const renderTest = (props) => {
     render(
-      <TextInput name="first-name" id="first-name" onChange={onChangeSpy} label="First name"/>
+      <TextInput name="first-name" id="first-name" onChange={onChangeSpy} label="First name" {...props} />
     );
   }
 
-  it('should render', () => {
-    renderTest();
-    expect(screen.getByText("First name")).toBeInTheDocument();
+  describe('rendering', () => {
+    it('should render the label', () => {
+      renderTest({});
+      expect(screen.getByText("First name")).toBeInTheDocument();
+    });
+
+    it('should render provided value', () => {
+      renderTest({value: 'upstart'});
+      expect(screen.getByDisplayValue('upstart')).toBeInTheDocument();
+    });
+
+    it('should disable input when disabled prop is provided', () => {
+      renderTest({disabled: true});
+      const input = screen.getByLabelText('First name');
+      expect(input).toBeDisabled();
+    });
+
+    it('should display helper text when provided', () => {
+      const helperText = 'please enter your first name';
+      renderTest({helperText});
+      expect(screen.getByText(helperText)).toBeInTheDocument();
+    });
+
+    it('should display as error message when helper text is provided and error flag is true', () => {
+      const helperText = 'please enter your first name';
+      renderTest({helperText, error: true, dataTestId: 'login-form'});
+      expect(screen.getByTestId('login-form-error-message')).toBeInTheDocument();
+    });
+
+    it('should show word "Required" when input is required', () => {
+      renderTest({required: true});
+      expect(screen.getByText("Required")).toBeInTheDocument();
+    });
+
+    it('should display as currency when type is currency and currency setter is provided', () => {
+      renderTest({type: 'currency', setCurrencyValue: () => {}, value: 100});
+      expect(screen.getByDisplayValue('$100')).toBeInTheDocument();
+    });
+
+    it('should display overrode label when provided', () => {
+      const overrodeLabel = 'First name (overrode)';
+      renderTest({textOverrides: {label: overrodeLabel}});
+      expect(screen.getByText(overrodeLabel)).toBeInTheDocument();
+    });
   });
 
-  it('should call onChangeSpy when typing', async () => {
-    renderTest();
+  describe('event', () => {
+    it('should call onChangeSpy when typing', async () => {
+      renderTest({});
 
-    const input = screen.getByLabelText('First name');
+      const input = screen.getByLabelText('First name');
 
-    await userEvent.type(input, 'abc');
+      await userEvent.type(input, 'abc');
 
-    expect(onChangeSpy).toHaveBeenCalledTimes(3);
-  });
+      expect(onChangeSpy).toHaveBeenCalledTimes(3);
+    });
+  })
+
 })

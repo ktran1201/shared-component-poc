@@ -16,7 +16,8 @@
     "build-storybook": "storybook build",
     "test": "vitest run",
     "test-watch": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "coverage": "vitest run --coverage"
   },
   "author": "kevin.tran.2@upstart.com",
   "license": "ISC",

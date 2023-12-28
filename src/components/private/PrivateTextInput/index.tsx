@@ -21,6 +21,10 @@ import ErrorMessage from "../ErrorMessage";
 import chroma from "chroma-js";
 import {Color, ShareComponentsThemeContext, Size} from "../../../theme";
 
+interface DataTestId {
+  dataTestId?: string;
+}
+
 export interface PrivateTextInputProps
   extends HTMLProps<
       'input',
@@ -226,7 +230,7 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
       type,
       onChange,
       ref,
-      'data-test-id': `${dataTestId}-text-input`,
+      'data-testid': `${dataTestId}-text-input`,
       style: inlineInputStyles,
       ...props,
       'aria-describedby': `${dataTestId}-error-helper`,
@@ -238,14 +242,14 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
 
     return (
       <StyledPrivateTextInput
-        data-test-id={`${dataTestId}-text-input-container`}
+        data-testid={`${dataTestId}-text-input-container`}
         styleOverrides={rootStyleOverrides}
       >
         <div className={styles.header}>
           {label && (
             // eslint-disable-next-line jsx-a11y/label-has-associated-control
             <Label
-              data-test-id={`${dataTestId}-text-input-label`}
+              data-testid={`${dataTestId}-text-input-label`}
               htmlFor={id}
               styleOverrides={labelStyleOverrides}
               error={error}
@@ -297,13 +301,13 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
         {(error || helperText) && (
           <HelperText
             id={`${id}-error-helper`}
-            data-test-id={`${dataTestId}-text-input-error-helper`}
+            data-testid={`${dataTestId}-text-input-error-helper`}
             error={error}
             styleOverrides={helperTextStyleOverrides}
             color={colorValue}
             fontSize={fontSizeValue}
           >
-            {error ? <ErrorMessage message={error} /> : helperText}
+            {error ? <ErrorMessage message={error} dataTestId={dataTestId} /> : helperText}
           </HelperText>
         )}
         {!(error || helperText) && hyperlinkElement}

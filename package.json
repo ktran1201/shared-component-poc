@@ -1,5 +1,4 @@
 {
-  "name": "shared-components",
   "version": "1.0.0",
   "description": "A library that shared UI components reside. This can help building UAR applications faster and having consistent look and feel, consumer can also override styles and texts.",
   "type": "module",
@@ -66,5 +65,9 @@
     "classnames": "^2.3.2",
     "react-currency-input-field": "^3.6.12",
     "react-loader-spinner": "^6.1.6"
-  }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@ktran1201"
+  },
+  "name": "@ktran1201/shared-component-poc"
 }

@@ -173,6 +173,7 @@ const StyledPrivateTextInput = styled.div<OverrideProps>`
 export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextInputProps>(
   (
     {
+      dataTestId,
       label = '',
       type = 'text',
       helperText,
@@ -225,10 +226,10 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
       type,
       onChange,
       ref,
-      'data-test-id': `${id}-text-input`,
+      'data-test-id': `${dataTestId}-text-input`,
       style: inlineInputStyles,
       ...props,
-      'aria-describedby': `${id}-error-helper`,
+      'aria-describedby': `${dataTestId}-error-helper`,
       error,
       styleOverrides: inputStyleOverrides,
       color: colorValue,
@@ -237,14 +238,14 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
 
     return (
       <StyledPrivateTextInput
-        data-test-id={`${id}-text-input-container`}
+        data-test-id={`${dataTestId}-text-input-container`}
         styleOverrides={rootStyleOverrides}
       >
         <div className={styles.header}>
           {label && (
             // eslint-disable-next-line jsx-a11y/label-has-associated-control
             <Label
-              data-test-id={`${id}-text-input-label`}
+              data-test-id={`${dataTestId}-text-input-label`}
               htmlFor={id}
               styleOverrides={labelStyleOverrides}
               error={error}
@@ -296,7 +297,7 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
         {(error || helperText) && (
           <HelperText
             id={`${id}-error-helper`}
-            data-test-id={`${id}-text-input-error-helper`}
+            data-test-id={`${dataTestId}-text-input-error-helper`}
             error={error}
             styleOverrides={helperTextStyleOverrides}
             color={colorValue}

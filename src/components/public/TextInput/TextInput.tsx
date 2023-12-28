@@ -21,7 +21,7 @@ export interface TextInputTextOverrides {
 
 interface TextInputProps {
   name: string;
-  id: string;
+  dataTestId: string;
   autoComplete?: string;
   value?: number | string;
   disabled?: boolean;
@@ -57,7 +57,7 @@ interface TextInputProps {
 
 const TextInput: React.FC<TextInputProps> = ({
   name,
-  id,
+                                               dataTestId,
   autoComplete,
   value,
   disabled,
@@ -88,7 +88,7 @@ const TextInput: React.FC<TextInputProps> = ({
     <>
       <PrivateTextInput
         name={name}
-        id={id}
+        dataTestId={dataTestId}
         autoComplete={autoComplete}
         value={value}
         disabled={disabled}

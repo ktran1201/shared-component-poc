@@ -1,13 +1,12 @@
-import React from "react";
 import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import {TextInput} from "./index";
+import {TextInput} from "../index";
 import {userEvent} from "@testing-library/user-event";
 
 describe('TextInput', () => {
   const onChangeSpy = vi.fn();
 
-  const renderTest = (props) => {
+  const renderTest = (props: any) => {
     render(
       <TextInput name="first-name" id="first-name" onChange={onChangeSpy} label="First name" {...props} />
     );

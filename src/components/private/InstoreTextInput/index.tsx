@@ -15,6 +15,7 @@ import FieldLabel from "../FieldLabel";
 import ErrorMessage from "../ErrorMessage";
 
 import styles from './TextInput.module.scss';
+import {DataTestId} from "../PrivateTextInput";
 
 export interface InstoreTextInputProps
   extends HTMLProps<

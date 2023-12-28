@@ -1,3 +1,4 @@
+// @ts-ignore
 import {useEffect, useState} from 'react';
 
 const appTheme = {
@@ -16,6 +17,7 @@ const appTheme = {
 
 export const useTheme = () => {
   // set application theme
+  // @ts-ignore
   const [theme, setTheme] = useState(appTheme);
 
   // fetch customer overrides and set it to theme

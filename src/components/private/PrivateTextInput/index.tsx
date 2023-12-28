@@ -21,7 +21,7 @@ import ErrorMessage from "../ErrorMessage";
 import chroma from "chroma-js";
 import {Color, ShareComponentsThemeContext, Size} from "../../../theme";
 
-interface DataTestId {
+export interface DataTestId {
   dataTestId?: string;
 }
 
@@ -203,8 +203,8 @@ export const PrivateTextInput = React.forwardRef<HTMLInputElement, PrivateTextIn
     const { label: labelTextOverrides} = textOverrides;
 
     const theme = useContext(ShareComponentsThemeContext);
-    const colorValue = theme?.colors?.[color || 'random'];
-    const fontSizeValue = theme?.fontSizes?.[fontSize || 'random'];
+    const colorValue = color ? theme?.colors?.[color] : undefined;
+    const fontSizeValue = fontSize ? theme?.fontSizes?.[fontSize] : undefined;
 
     const id = React.useId();
     const { setPrependComponentRef, setAppendComponentRef, inlineInputStyles } =

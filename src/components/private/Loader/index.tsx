@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { Circles } from 'react-loader-spinner';
 
 import styles from './Loader.module.scss';
+import {DataTestId} from "../PrivateTextInput";
 
 export enum LoaderSize {
   SMALL = 'small',

@@ -19,7 +19,7 @@ export interface TextInputTextOverrides {
   label: string;
 }
 
-interface TextInputProps {
+export interface TextInputProps {
   name: string;
   dataTestId: string;
   autoComplete?: string;

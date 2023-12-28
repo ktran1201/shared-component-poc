@@ -1,9 +1,9 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import {TextInput} from "../components/public/TextInput";
 import {useTheme} from "./useTheme";
 import {Color, ShareComponentsThemeContext, Size} from '../theme'
 
-interface AppProps {
+export interface AppProps {
   color?: Color;
   fontSize?: Size;
 }
@@ -15,12 +15,11 @@ const App: React.FC<AppProps> = ({color, fontSize}) => {
     <ShareComponentsThemeContext.Provider value={theme}>
       <TextInput
         name='first-name'
-        id='first-name'
+        dataTestId='login-form'
         autoComplete = 'off'
         value = "Upstart"
         disabled ={false}
         error={false}
-        fullWidth={false}
         helperText='please type your first name'
         label = 'First name'
         placeholder = 'First name'
@@ -28,6 +27,7 @@ const App: React.FC<AppProps> = ({color, fontSize}) => {
         type='text'
         color={color}
         fontSize={fontSize}
+        onChange={(val: ChangeEvent<HTMLInputElement>) => {console.log(val)}}
       />
     </ShareComponentsThemeContext.Provider>
   )

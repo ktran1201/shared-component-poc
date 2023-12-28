@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 export const defaults: Story = {
   args: {
     name: 'first-name',
-    id: 'first-name',
+    dataTestId: 'first-name',
     autoComplete: 'off',
     value: "Upstart",
     disabled: false,
@@ -47,7 +47,7 @@ export const defaults: Story = {
 export const withOverrides: Story = {
   args: {
     name: 'first-name',
-    id: 'first-name',
+    dataTestId: 'first-name',
     autoComplete: 'off',
     value: "Upstart",
     disabled: false,

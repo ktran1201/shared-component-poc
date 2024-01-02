@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import classNames from 'classnames';
-import { Circles } from 'react-loader-spinner';
+import classNames from "classnames";
+import { Circles } from "react-loader-spinner";
 
-import styles from './Loader.module.scss';
-import {DataTestId} from "../PrivateTextInput";
+import styles from "./Loader.module.scss";
+import { DataTestId } from "../PrivateTextInput";
 
 export enum LoaderSize {
-  SMALL = 'small',
-  MEDIUM = 'medium',
-  LARGE = 'large',
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
 }
 
 export interface LoaderProps extends DataTestId {
@@ -26,7 +26,7 @@ const DIMENSIONS = {
 
 const Loader: React.FC<LoaderProps> = ({
   className,
-  dataTestId = 'loader',
+  dataTestId = "loader",
   size = LoaderSize.LARGE,
   overlay = false,
 }) => (

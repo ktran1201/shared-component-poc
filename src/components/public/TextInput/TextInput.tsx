@@ -1,6 +1,6 @@
-import React, {ChangeEvent, HTMLInputTypeAttribute, ReactNode} from "react";
-import {Color, Size} from "../../../theme";
-import {PrivateTextInput} from "../../private/PrivateTextInput";
+import React, { ChangeEvent, HTMLInputTypeAttribute, ReactNode } from "react";
+import { Color, Size } from "../../../theme";
+import { PrivateTextInput } from "../../private/PrivateTextInput";
 
 interface StyleOverrides {
   color?: string;
@@ -34,7 +34,7 @@ export interface TextInputProps {
   label?: string;
   placeholder?: string;
   required?: boolean;
-  type?: HTMLInputTypeAttribute | undefined | 'currency';
+  type?: HTMLInputTypeAttribute | undefined | "currency";
 
   styleOverrides?: TextInputStyleOverrides;
   textOverrides?: TextInputTextOverrides;
@@ -57,7 +57,7 @@ export interface TextInputProps {
 
 const TextInput: React.FC<TextInputProps> = ({
   name,
-                                               dataTestId,
+  dataTestId,
   autoComplete,
   value,
   disabled,
@@ -90,8 +90,8 @@ const TextInput: React.FC<TextInputProps> = ({
         autoComplete={autoComplete}
         value={value}
         disabled={disabled}
-        error={error ? helperText : ''}
-        helperText={!error ? helperText : ''}
+        error={error ? helperText : ""}
+        helperText={!error ? helperText : ""}
         label={label}
         placeholder={placeholder}
         isRequired={required}
@@ -101,7 +101,6 @@ const TextInput: React.FC<TextInputProps> = ({
         textOverrides={textOverrides}
         color={color}
         fontSize={fontSize}
-
         toUpperCase={toUpperCase}
         hyperlinkElement={hyperlinkElement}
         appendComponent={appendComponent}
@@ -112,7 +111,6 @@ const TextInput: React.FC<TextInputProps> = ({
         isLoading={isLoading}
       />
     </>
-
   );
 };
 

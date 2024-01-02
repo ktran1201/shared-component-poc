@@ -1,19 +1,19 @@
 // @ts-ignore
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from "react";
 
 const appTheme = {
   colors: {
-    primary: 'green',
-    secondary: 'orange',
+    primary: "green",
+    secondary: "orange",
   },
   fontSizes: {
-    xs: '10px',
-    sm: '15px',
-    md: '20px',
-    lg: '25px',
-    xl: '30px',
-  }
-}
+    xs: "10px",
+    sm: "15px",
+    md: "20px",
+    lg: "25px",
+    xl: "30px",
+  },
+};
 
 export const useTheme = () => {
   // set application theme
@@ -33,4 +33,3 @@ export const useTheme = () => {
 
   return theme;
 };
-

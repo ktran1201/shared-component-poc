@@ -5,38 +5,38 @@ import React, {
   ReactNode,
   useMemo,
   useState,
-} from 'react';
+} from "react";
 
-import classNames from 'classnames';
-import CurrencyInput from 'react-currency-input-field';
-import {HTMLProps} from "../../../utils/htmlProps";
-import Loader, {LoaderSize} from "../Loader";
+import classNames from "classnames";
+import CurrencyInput from "react-currency-input-field";
+import { HTMLProps } from "../../../utils/htmlProps";
+import Loader, { LoaderSize } from "../Loader";
 import FieldLabel from "../FieldLabel";
 import ErrorMessage from "../ErrorMessage";
 
-import styles from './TextInput.module.scss';
-import {DataTestId} from "../PrivateTextInput";
+import styles from "./TextInput.module.scss";
+import { DataTestId } from "../PrivateTextInput";
 
 export interface InstoreTextInputProps
   extends HTMLProps<
-    'input',
-    | 'name'
-    | 'placeholder'
-    | 'autoComplete'
-    | 'id'
-    | 'onKeyDown'
-    | 'onBlur'
-    | 'onChange'
-    | 'value'
-    | 'disabled'
-    | 'maxLength'
-    | 'minLength'
+      "input",
+      | "name"
+      | "placeholder"
+      | "autoComplete"
+      | "id"
+      | "onKeyDown"
+      | "onBlur"
+      | "onChange"
+      | "value"
+      | "disabled"
+      | "maxLength"
+      | "minLength"
     >,
     DataTestId {
   // Name is our main identifier for property the value will map to
   error?: string;
-  type?: HTMLInputTypeAttribute | undefined | 'currency';
-  size?: 'md' | 'lg';
+  type?: HTMLInputTypeAttribute | undefined | "currency";
+  size?: "md" | "lg";
   label?: string;
   tooltip?: string;
   helperText?: string;
@@ -56,19 +56,22 @@ export interface InstoreTextInputProps
   setCurrencyValue?: (value: string | undefined) => void;
 }
 
-export const InstoreTextInput = React.forwardRef<HTMLInputElement, InstoreTextInputProps>(
+export const InstoreTextInput = React.forwardRef<
+  HTMLInputElement,
+  InstoreTextInputProps
+>(
   (
     {
-      label = '',
-      type = 'text',
-      size = 'md',
+      label = "",
+      type = "text",
+      size = "md",
       // tooltip,
       helperText,
-      error = '',
+      error = "",
       onChange: _onChange,
-      inputClassName = '',
+      inputClassName = "",
       containerClassName,
-      labelClassName = '',
+      labelClassName = "",
       toUpperCase,
       isLoading,
       isRequired = false,
@@ -107,15 +110,15 @@ export const InstoreTextInput = React.forwardRef<HTMLInputElement, InstoreTextIn
       id,
       className: classNames(styles.input, inputClassName, {
         [styles.inputError]: !!error,
-        [styles.sizeLarge]: size === 'lg',
+        [styles.sizeLarge]: size === "lg",
       }),
       type,
       onChange,
       ref,
-      'data-test-id': `${dataTestId}-text-input`,
+      "data-test-id": `${dataTestId}-text-input`,
       style: inlineInputStyles,
       ...props,
-      'aria-describedby': `${id}-error-helper`,
+      "aria-describedby": `${id}-error-helper`,
     };
 
     return (
@@ -124,7 +127,7 @@ export const InstoreTextInput = React.forwardRef<HTMLInputElement, InstoreTextIn
         className={classNames(
           styles.textInputContainer,
           containerClassName,
-          fullWidth ? 'fullWidth' : '',
+          fullWidth ? "fullWidth" : "",
         )}
       >
         <div className={styles.header}>
@@ -135,7 +138,7 @@ export const InstoreTextInput = React.forwardRef<HTMLInputElement, InstoreTextIn
               htmlFor={id}
               className={classNames(
                 styles.label,
-                error ? styles.labelError : '',
+                error ? styles.labelError : "",
                 labelClassName,
               )}
             >
@@ -157,7 +160,7 @@ export const InstoreTextInput = React.forwardRef<HTMLInputElement, InstoreTextIn
               {prependComponent}
             </div>
           )}
-          {type === 'currency' && !!setCurrencyValue ? (
+          {type === "currency" && !!setCurrencyValue ? (
             <CurrencyInput
               name="input-name"
               decimalsLimit={2}
@@ -185,7 +188,7 @@ export const InstoreTextInput = React.forwardRef<HTMLInputElement, InstoreTextIn
             data-test-id={`${dataTestId}-text-input-error-helper`}
             className={classNames(
               styles.helperText,
-              error ? styles.fieldError : '',
+              error ? styles.fieldError : "",
             )}
           >
             {error ? <ErrorMessage message={error} /> : helperText}
@@ -197,7 +200,7 @@ export const InstoreTextInput = React.forwardRef<HTMLInputElement, InstoreTextIn
   },
 );
 
-InstoreTextInput.displayName = 'TextInput';
+InstoreTextInput.displayName = "TextInput";
 
 /**
  * Custom hook to calculate prepended / appending component widths to be able to

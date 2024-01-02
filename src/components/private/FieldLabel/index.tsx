@@ -1,5 +1,5 @@
 // Stability: Experimental
-import React from 'react';
+import React from "react";
 
 export interface Index {
   label: React.ReactNode;

@@ -1,7 +1,7 @@
-import {createContext} from "react";
+import { createContext } from "react";
 
-export type Color = 'primary' | 'secondary';
-export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type Color = "primary" | "secondary";
+export type Size = "xs" | "sm" | "md" | "lg" | "xl";
 
 export interface ShareComponentsThemeContextType {
   colors: {
@@ -17,19 +17,19 @@ export interface ShareComponentsThemeContextType {
   };
 }
 
-
 const defaultTheme = {
   colors: {
-    primary: 'green',
-    secondary: 'purple'
+    primary: "green",
+    secondary: "purple",
   },
   fontSizes: {
-    xs: '12px',
-    sm: '14px',
-    md: '16px',
-    lg: '18px',
-    xl: '20px',
-  }
-}
+    xs: "12px",
+    sm: "14px",
+    md: "16px",
+    lg: "18px",
+    xl: "20px",
+  },
+};
 
-export const ShareComponentsThemeContext = createContext<ShareComponentsThemeContextType>(defaultTheme);
+export const ShareComponentsThemeContext =
+  createContext<ShareComponentsThemeContextType>(defaultTheme);

@@ -225,7 +225,7 @@ export const PrivateTextInput = React.forwardRef<
     const colorValue = color ? theme?.colors?.[color] : undefined;
     const fontSizeValue = fontSize ? theme?.fontSizes?.[fontSize] : undefined;
 
-    const id = React.useId();
+    const id = Date.now() + '';
     const { setPrependComponentRef, setAppendComponentRef, inlineInputStyles } =
       useInlineComponents();
 

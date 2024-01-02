@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A library that shared UI components reside. This can help building UAR applications faster and having consistent look and feel, consumer can also override styles and texts.",
   "type": "module",
   "main": "dist/index.cjs.js",

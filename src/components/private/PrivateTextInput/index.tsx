@@ -89,7 +89,6 @@ interface OverrideProps {
 
 const $inputErrorLabel = `
   color: ${$colorErrorDark};
-  font-size: 10px;
   opacity: 1;
 `;
 

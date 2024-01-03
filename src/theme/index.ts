@@ -7,6 +7,9 @@ export interface ShareComponentsThemeContextType {
   colors?: {
     primary?: string;
     secondary?: string;
+    success?: string;
+    error?: string;
+    info?: string;
   };
   fontSizes?: {
     xs?: string;

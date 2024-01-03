@@ -22,8 +22,14 @@ import styled from "styled-components";
 import Loader, { LoaderSize } from "../Loader";
 import FieldLabel from "../FieldLabel";
 import ErrorMessage from "../ErrorMessage";
-import chroma from "chroma-js";
 import { Color, ShareComponentsThemeContext, Size } from "../../../theme";
+import {
+  $colorBlackLight,
+  $colorBlackMed,
+  $colorErrorDark,
+  $colorInputBorderGrey,
+  $colorPrimaryMed
+} from "../../../constants/styles";
 
 export interface DataTestId {
   dataTestId?: string;
@@ -79,15 +85,7 @@ interface OverrideProps {
   error?: string;
 }
 
-const $colorBlackMed = "rgba(51, 51, 51, 0.6)";
-const $colorPrimaryDark = "#1a6664";
-const $colorErrorDark = "#d71974";
-const $colorInputBorderGrey = "#919191";
-const $colorBlackLight = "rgba(51, 51, 51, 0.38)";
 
-const $colorPrimaryMed = chroma
-  .hsl(chroma($colorPrimaryDark).hsl()[0], 0.42, 0.36)
-  .hex();
 
 const $inputErrorLabel = `
   color: ${$colorErrorDark};
@@ -100,11 +98,6 @@ const $input = `
   border-radius: 8px;
   border: 1px solid ${$colorInputBorderGrey};
   padding: 8px 16px;
-
-  &.sizeLarge {
-    padding: 12px;
-    line-height: 24px;
-  }
 
   &::placeholder {
     color: ${$colorBlackLight};
@@ -156,7 +149,7 @@ const Label = styled.label<OverrideProps>`
 `;
 
 const HelperText = styled.div<OverrideProps>`
-  margin: 2px 0px 0px;
+  margin: 2px 0 0;
   height: 12px;
   width: 100%;
   opacity: 1;
@@ -180,7 +173,8 @@ const StyledPrivateTextInput = styled.div<OverrideProps>`
     }
 
     ${Label} {
-      color: ${$colorPrimaryMed};
+      color: ${(props) =>
+  props.styleOverrides?.color || props.color || $colorPrimaryMed};
     }
   }
 `;
@@ -222,8 +216,8 @@ export const PrivateTextInput = React.forwardRef<
     const { label: labelTextOverrides } = textOverrides;
 
     const theme = useContext(ShareComponentsThemeContext);
-    const colorValue = color ? theme?.colors?.[color] : undefined;
-    const fontSizeValue = fontSize ? theme?.fontSizes?.[fontSize] : undefined;
+    const themeColor = color ? theme?.colors?.[color] : undefined;
+    const themeFontSize = fontSize ? theme?.fontSizes?.[fontSize] : undefined;
 
     const id = Date.now() + '';
     const { setPrependComponentRef, setAppendComponentRef, inlineInputStyles } =
@@ -255,14 +249,15 @@ export const PrivateTextInput = React.forwardRef<
       "aria-describedby": `${dataTestId}-error-helper`,
       error,
       styleOverrides: inputStyleOverrides,
-      color: colorValue,
-      fontSize: fontSizeValue,
+      color: themeColor,
+      fontSize: themeFontSize,
     };
 
     return (
       <StyledPrivateTextInput
         data-testid={`${dataTestId}-text-input-container`}
         styleOverrides={rootStyleOverrides}
+        color={themeColor}
       >
         <div className={styles.header}>
           {label && (
@@ -273,8 +268,8 @@ export const PrivateTextInput = React.forwardRef<
               styleOverrides={labelStyleOverrides}
               error={error}
               className={styles.label}
-              color={colorValue}
-              fontSize={fontSizeValue}
+              color={themeColor}
+              fontSize={themeFontSize}
             >
               <FieldLabel
                 isRequired={isRequired}
@@ -323,8 +318,8 @@ export const PrivateTextInput = React.forwardRef<
             data-testid={`${dataTestId}-text-input-error-helper`}
             error={error}
             styleOverrides={helperTextStyleOverrides}
-            color={colorValue}
-            fontSize={fontSizeValue}
+            color={themeColor}
+            fontSize={themeFontSize}
           >
             {error ? (
               <ErrorMessage message={error} dataTestId={dataTestId} />

@@ -9,10 +9,10 @@ interface StyleOverrides {
 }
 
 export interface TextInputStyleOverrides {
-  root: StyleOverrides;
-  label: StyleOverrides;
-  input: StyleOverrides;
-  helperText: StyleOverrides;
+  root?: StyleOverrides;
+  label?: StyleOverrides;
+  input?: StyleOverrides;
+  helperText?: StyleOverrides;
 }
 
 export interface TextInputTextOverrides {

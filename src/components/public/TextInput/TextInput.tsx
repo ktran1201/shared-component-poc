@@ -40,7 +40,7 @@ export interface TextInputProps {
   textOverrides?: TextInputTextOverrides;
 
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-
+  onBlur: (event: React.FocusEvent<any>) => void;
   color?: Color;
   fontSize?: Size;
 
@@ -68,6 +68,7 @@ const TextInput: React.FC<TextInputProps> = ({
   required,
   type,
   onChange,
+                                               onBlur,
   styleOverrides,
   textOverrides,
   color,
@@ -97,6 +98,7 @@ const TextInput: React.FC<TextInputProps> = ({
         isRequired={required}
         type={type}
         onChange={onChange}
+        onBlur={onBlur}
         styleOverrides={styleOverrides}
         textOverrides={textOverrides}
         color={color}

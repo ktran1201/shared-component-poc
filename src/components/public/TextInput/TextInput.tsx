@@ -40,7 +40,7 @@ export interface TextInputProps {
   textOverrides?: TextInputTextOverrides;
 
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (event: React.FocusEvent<any>) => void;
+  onBlur?: (event: React.FocusEvent<any>) => void;
   color?: Color;
   fontSize?: Size;
 

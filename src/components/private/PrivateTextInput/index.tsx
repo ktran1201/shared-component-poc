@@ -29,6 +29,7 @@ import {
   $colorInputBorderGrey,
   $colorPrimaryMed,
 } from "../../../constants/styles";
+import CurrencyInput from "react-currency-input-field";
 
 export interface DataTestId {
   dataTestId?: string;
@@ -115,15 +116,15 @@ const $input = `
   }
 `;
 
-// const StyledCurrencyInput = styled(CurrencyInput)<OverrideProps>`
-//   ${$input}
-//
-//   color: ${(props) => props.styleOverrides?.color || props.color || "#000000"};
-//   font-size: ${(props) =>
-//     props.styleOverrides?.fontSize || props.fontSize || "16px"};
-//
-//   ${(props) => props.error && `border-color: ${$colorErrorDark};`}
-// `;
+const StyledCurrencyInput = styled(CurrencyInput)<OverrideProps>`
+  ${$input}
+
+  color: ${(props) => props.styleOverrides?.color || props.color || "#000000"};
+  font-size: ${(props) =>
+    props.styleOverrides?.fontSize || props.fontSize || "16px"};
+
+  ${(props) => props.error && `border-color: ${$colorErrorDark};`}
+`;
 
 const Input = styled.input<OverrideProps>`
   ${$input}
@@ -290,14 +291,13 @@ export const PrivateTextInput = React.forwardRef<
             </div>
           )}
           {type === "currency" && !!setCurrencyValue ? (
-            // <StyledCurrencyInput
-            //   name="input-name"
-            //   decimalsLimit={2}
-            //   prefix="$"
-            //   onValueChange={(value) => setCurrencyValue(value)}
-            //   {...inputProps}
-            // />
-            <Input {...inputProps} />
+            <StyledCurrencyInput
+              name="input-name"
+              decimalsLimit={2}
+              prefix="$"
+              onValueChange={(value) => setCurrencyValue(value)}
+              {...inputProps}
+            />
           ) : (
             <Input {...inputProps} />
           )}

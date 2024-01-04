@@ -15,6 +15,7 @@ import ErrorMessage from "../ErrorMessage";
 
 import styles from "./TextInput.module.scss";
 import { DataTestId } from "../PrivateTextInput";
+import CurrencyInput from "react-currency-input-field";
 
 export interface InstoreTextInputProps
   extends HTMLProps<
@@ -160,14 +161,13 @@ const InstoreTextInput = React.forwardRef<
             </div>
           )}
           {type === "currency" && !!setCurrencyValue ? (
-            // <CurrencyInput
-            //   name="input-name"
-            //   decimalsLimit={2}
-            //   prefix="$"
-            //   onValueChange={(value) => setCurrencyValue(value)}
-            //   {...inputProps}
-            // />
-            <input {...inputProps} />
+            <CurrencyInput
+              name="input-name"
+              decimalsLimit={2}
+              prefix="$"
+              onValueChange={(value) => setCurrencyValue(value)}
+              {...inputProps}
+            />
           ) : (
             <input {...inputProps} />
           )}

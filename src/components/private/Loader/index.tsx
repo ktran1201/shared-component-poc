@@ -4,6 +4,7 @@ import classNames from "classnames";
 
 import styles from "./Loader.module.scss";
 import { DataTestId } from "../PrivateTextInput";
+import { Circles } from "react-loader-spinner";
 
 export enum LoaderSize {
   SMALL = "small",
@@ -17,16 +18,16 @@ export interface LoaderProps extends DataTestId {
   overlay?: boolean;
 }
 
-// const DIMENSIONS = {
-//   [LoaderSize.SMALL]: { height: 20, width: 20 },
-//   [LoaderSize.MEDIUM]: { height: 50, width: 50 },
-//   [LoaderSize.LARGE]: { height: 80, width: 80 },
-// };
+const DIMENSIONS = {
+  [LoaderSize.SMALL]: { height: 20, width: 20 },
+  [LoaderSize.MEDIUM]: { height: 50, width: 50 },
+  [LoaderSize.LARGE]: { height: 80, width: 80 },
+};
 
 const Loader: React.FC<LoaderProps> = ({
   className,
   dataTestId = "loader",
-  // size = LoaderSize.LARGE,
+  size = LoaderSize.LARGE,
   overlay = false,
 }) => (
   <div
@@ -37,7 +38,7 @@ const Loader: React.FC<LoaderProps> = ({
       overlay && styles.withOverlay,
     )}
   >
-    {/*<Circles {...DIMENSIONS[size]} />*/}
+    <Circles {...DIMENSIONS[size]} />
     Loading
   </div>
 );

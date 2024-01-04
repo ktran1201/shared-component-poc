@@ -56,7 +56,7 @@ export interface InstoreTextInputProps
   setCurrencyValue?: (value: string | undefined) => void;
 }
 
-export const InstoreTextInput = React.forwardRef<
+const InstoreTextInput = React.forwardRef<
   HTMLInputElement,
   InstoreTextInputProps
 >(
@@ -239,3 +239,5 @@ function useInlineComponents(): {
     inlineInputStyles,
   };
 }
+
+export default InstoreTextInput;

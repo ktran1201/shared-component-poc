@@ -87,7 +87,7 @@ const InstoreTextInput = React.forwardRef<
     },
     ref,
   ) => {
-    const id = React.useId();
+    const id = Date.now() + '';
     const { setPrependComponentRef, setAppendComponentRef, inlineInputStyles } =
       useInlineComponents();
 

@@ -39,8 +39,9 @@ export interface TextInputProps {
   styleOverrides?: TextInputStyleOverrides;
   textOverrides?: TextInputTextOverrides;
 
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.FocusEvent<any>) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   color?: Color;
   fontSize?: Size;
 
@@ -51,6 +52,7 @@ export interface TextInputProps {
   prependComponent?: ReactNode;
   editButton?: React.ReactNode;
   setCurrencyValue?: (value: string | undefined) => void;
+  minLength?: number;
   maxLength?: number;
   isLoading?: boolean;
 }
@@ -69,6 +71,7 @@ const TextInput: React.FC<TextInputProps> = ({
   type,
   onChange,
   onBlur,
+  onKeyDown,
   styleOverrides,
   textOverrides,
   color,
@@ -80,6 +83,7 @@ const TextInput: React.FC<TextInputProps> = ({
   prependComponent,
   editButton,
   setCurrencyValue,
+  minLength,
   maxLength,
   isLoading,
 }) => {
@@ -99,6 +103,7 @@ const TextInput: React.FC<TextInputProps> = ({
         type={type}
         onChange={onChange}
         onBlur={onBlur}
+        onKeyDown={onKeyDown}
         styleOverrides={styleOverrides}
         textOverrides={textOverrides}
         color={color}
@@ -109,6 +114,7 @@ const TextInput: React.FC<TextInputProps> = ({
         prependComponent={prependComponent}
         editButton={editButton}
         setCurrencyValue={setCurrencyValue}
+        minLength={minLength}
         maxLength={maxLength}
         isLoading={isLoading}
       />

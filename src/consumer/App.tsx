@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { TextInput } from "../components/public/TextInput";
 import { useTheme } from "./useTheme";
 import { Color, ShareComponentsThemeContext, Size } from "../theme";
@@ -10,14 +10,14 @@ export interface AppProps {
 
 const App: React.FC<AppProps> = ({ color, fontSize }) => {
   const theme = useTheme();
-
+  const [val, setVal] = useState("");
   return (
     <ShareComponentsThemeContext.Provider value={theme}>
       <TextInput
         name="first-name"
         dataTestId="login-form"
         autoComplete="off"
-        value="Upstart"
+        value={val}
         disabled={false}
         error={false}
         helperText="please type your first name"
@@ -27,8 +27,11 @@ const App: React.FC<AppProps> = ({ color, fontSize }) => {
         type="text"
         color={color}
         fontSize={fontSize}
-        onChange={(val: ChangeEvent<HTMLInputElement>) => {
-          console.log(val);
+        minLength={3}
+        maxLength={10}
+        toUpperCase={true}
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+          setVal(event.target.value);
         }}
       />
     </ShareComponentsThemeContext.Provider>

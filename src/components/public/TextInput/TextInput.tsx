@@ -68,7 +68,7 @@ const TextInput: React.FC<TextInputProps> = ({
   required,
   type,
   onChange,
-                                               onBlur,
+  onBlur,
   styleOverrides,
   textOverrides,
   color,

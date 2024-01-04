@@ -8,7 +8,6 @@ import React, {
 } from "react";
 
 import classNames from "classnames";
-import CurrencyInput from "react-currency-input-field";
 import { HTMLProps } from "../../../utils/htmlProps";
 import Loader, { LoaderSize } from "../Loader";
 import FieldLabel from "../FieldLabel";
@@ -87,7 +86,7 @@ const InstoreTextInput = React.forwardRef<
     },
     ref,
   ) => {
-    const id = Date.now() + '';
+    const id = Date.now() + "";
     const { setPrependComponentRef, setAppendComponentRef, inlineInputStyles } =
       useInlineComponents();
 
@@ -161,13 +160,14 @@ const InstoreTextInput = React.forwardRef<
             </div>
           )}
           {type === "currency" && !!setCurrencyValue ? (
-            <CurrencyInput
-              name="input-name"
-              decimalsLimit={2}
-              prefix="$"
-              onValueChange={(value) => setCurrencyValue(value)}
-              {...inputProps}
-            />
+            // <CurrencyInput
+            //   name="input-name"
+            //   decimalsLimit={2}
+            //   prefix="$"
+            //   onValueChange={(value) => setCurrencyValue(value)}
+            //   {...inputProps}
+            // />
+            <input {...inputProps} />
           ) : (
             <input {...inputProps} />
           )}

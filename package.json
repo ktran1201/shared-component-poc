@@ -1,5 +1,5 @@
 {
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A library that shared UI components reside. This can help building UAR applications faster and having consistent look and feel, consumer can also override styles and texts.",
   "type": "module",
   "main": "dist/index.cjs.js",
@@ -60,10 +60,7 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
-    "chroma-js": "^2.4.2",
-    "classnames": "^2.3.2",
-    "react-currency-input-field": "^3.6.12",
-    "react-loader-spinner": "^6.1.6"
+    "classnames": "^2.3.2"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@ktran1201"

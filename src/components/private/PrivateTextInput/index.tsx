@@ -9,7 +9,6 @@ import React, {
 } from "react";
 
 import classNames from "classnames";
-import CurrencyInput from "react-currency-input-field";
 
 import styles from "./TextInput.module.scss";
 
@@ -28,7 +27,7 @@ import {
   $colorBlackMed,
   $colorErrorDark,
   $colorInputBorderGrey,
-  $colorPrimaryMed
+  $colorPrimaryMed,
 } from "../../../constants/styles";
 
 export interface DataTestId {
@@ -85,8 +84,6 @@ interface OverrideProps {
   error?: string;
 }
 
-
-
 const $inputErrorLabel = `
   color: ${$colorErrorDark};
   opacity: 1;
@@ -118,15 +115,15 @@ const $input = `
   }
 `;
 
-const StyledCurrencyInput = styled(CurrencyInput)<OverrideProps>`
-  ${$input}
-
-  color: ${(props) => props.styleOverrides?.color || props.color || "#000000"};
-  font-size: ${(props) =>
-    props.styleOverrides?.fontSize || props.fontSize || "16px"};
-
-  ${(props) => props.error && `border-color: ${$colorErrorDark};`}
-`;
+// const StyledCurrencyInput = styled(CurrencyInput)<OverrideProps>`
+//   ${$input}
+//
+//   color: ${(props) => props.styleOverrides?.color || props.color || "#000000"};
+//   font-size: ${(props) =>
+//     props.styleOverrides?.fontSize || props.fontSize || "16px"};
+//
+//   ${(props) => props.error && `border-color: ${$colorErrorDark};`}
+// `;
 
 const Input = styled.input<OverrideProps>`
   ${$input}
@@ -173,7 +170,7 @@ const StyledPrivateTextInput = styled.div<OverrideProps>`
 
     ${Label} {
       color: ${(props) =>
-  props.styleOverrides?.color || props.color || $colorPrimaryMed};
+        props.styleOverrides?.color || props.color || $colorPrimaryMed};
     }
   }
 `;
@@ -221,7 +218,7 @@ export const PrivateTextInput = React.forwardRef<
     console.log("color", color);
     console.log("fontSize", fontSize);
 
-    const id = Date.now() + '';
+    const id = Date.now() + "";
     const { setPrependComponentRef, setAppendComponentRef, inlineInputStyles } =
       useInlineComponents();
 
@@ -293,13 +290,14 @@ export const PrivateTextInput = React.forwardRef<
             </div>
           )}
           {type === "currency" && !!setCurrencyValue ? (
-            <StyledCurrencyInput
-              name="input-name"
-              decimalsLimit={2}
-              prefix="$"
-              onValueChange={(value) => setCurrencyValue(value)}
-              {...inputProps}
-            />
+            // <StyledCurrencyInput
+            //   name="input-name"
+            //   decimalsLimit={2}
+            //   prefix="$"
+            //   onValueChange={(value) => setCurrencyValue(value)}
+            //   {...inputProps}
+            // />
+            <Input {...inputProps} />
           ) : (
             <Input {...inputProps} />
           )}

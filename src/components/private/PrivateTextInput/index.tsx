@@ -1,27 +1,17 @@
 // Stability: Experimental
 //! Todo ToolTips
-import React, {
-  HTMLInputTypeAttribute,
-  ReactNode,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import React, { useContext, useMemo, useState } from "react";
 
 import classNames from "classnames";
 
 import styles from "./TextInput.module.scss";
 
-import { HTMLProps } from "../../../utils/htmlProps";
-import {
-  TextInputStyleOverrides,
-  TextInputTextOverrides,
-} from "../../public/TextInput/TextInput";
+import { TextInputProps } from "../../public/TextInput/TextInput";
 import styled from "styled-components";
 import Loader, { LoaderSize } from "../Loader";
 import FieldLabel from "../FieldLabel";
 import ErrorMessage from "../ErrorMessage";
-import { Color, ShareComponentsThemeContext, Size } from "../../../theme";
+import { ShareComponentsThemeContext } from "../../../theme";
 import {
   $colorBlackLight,
   $colorBlackMed,
@@ -33,45 +23,6 @@ import CurrencyInput from "react-currency-input-field";
 
 export interface DataTestId {
   dataTestId?: string;
-}
-
-export interface PrivateTextInputProps
-  extends HTMLProps<
-      "input",
-      | "name"
-      | "placeholder"
-      | "autoComplete"
-      | "id"
-      | "onKeyDown"
-      | "onBlur"
-      | "onChange"
-      | "value"
-      | "disabled"
-      | "maxLength"
-      | "minLength"
-    >,
-    DataTestId {
-  // Name is our main identifier for property the value will map to
-  error?: string;
-  type?: HTMLInputTypeAttribute | undefined | "currency";
-  label?: string;
-  tooltip?: string;
-  helperText?: string;
-  disabled?: boolean;
-  toUpperCase?: boolean;
-  isLoading?: boolean;
-  isRequired?: boolean;
-  hyperlinkElement?: any;
-  appendComponent?: ReactNode;
-  prependComponent?: ReactNode;
-  editButton?: React.ReactNode;
-  setCurrencyValue?: (value: string | undefined) => void;
-
-  styleOverrides?: TextInputStyleOverrides;
-  textOverrides?: TextInputTextOverrides;
-
-  color?: Color;
-  fontSize?: Size;
 }
 
 interface OverrideProps {
@@ -178,7 +129,7 @@ const StyledPrivateTextInput = styled.div<OverrideProps>`
 
 export const PrivateTextInput = React.forwardRef<
   HTMLInputElement,
-  PrivateTextInputProps
+  TextInputProps
 >(
   (
     {
@@ -239,7 +190,6 @@ export const PrivateTextInput = React.forwardRef<
     };
 
     const inputProps = {
-      id,
       type,
       onChange,
       ref,
@@ -251,6 +201,7 @@ export const PrivateTextInput = React.forwardRef<
       styleOverrides: inputStyleOverrides,
       color: themeColor,
       fontSize: themeFontSize,
+      id,
     };
 
     return (

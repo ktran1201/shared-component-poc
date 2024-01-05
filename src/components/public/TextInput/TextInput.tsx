@@ -1,6 +1,7 @@
-import React, { ChangeEvent, HTMLInputTypeAttribute, ReactNode } from "react";
+import React, { HTMLInputTypeAttribute, ReactNode } from "react";
 import { Color, Size } from "../../../theme";
-import { PrivateTextInput } from "../../private/PrivateTextInput";
+import { DataTestId, PrivateTextInput } from "../../private/PrivateTextInput";
+import { HTMLProps } from "../../../utils/htmlProps";
 
 interface StyleOverrides {
   color?: string;
@@ -19,42 +20,81 @@ export interface TextInputTextOverrides {
   label: string;
 }
 
-export interface TextInputProps {
-  name: string;
-  dataTestId: string;
-  autoComplete?: string;
-  value?: number | string;
-  disabled?: boolean;
-  /**
-   * If true, the TextInput is displayed in an error state.
-   * Error message can be provided via `helperText`
-   */
-  error?: boolean;
-  helperText?: string;
-  label?: string;
-  placeholder?: string;
-  required?: boolean;
+// export interface TextInputProps {
+//   name: string;
+//   dataTestId: string;
+//   autoComplete?: string;
+//   value?: number | string;
+//   disabled?: boolean;
+//   /**
+//    * If true, the TextInput is displayed in an error state.
+//    * Error message can be provided via `helperText`
+//    */
+//   error?: boolean;
+//   helperText?: string;
+//   label?: string;
+//   placeholder?: string;
+//   required?: boolean;
+//   type?: HTMLInputTypeAttribute | undefined | "currency";
+//
+//   styleOverrides?: TextInputStyleOverrides;
+//   textOverrides?: TextInputTextOverrides;
+//
+//   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+//   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+//   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+//   color?: Color;
+//   fontSize?: Size;
+//
+//   // PrivateTextInput props
+//   toUpperCase?: boolean;
+//   hyperlinkElement?: any;
+//   appendComponent?: ReactNode;
+//   prependComponent?: ReactNode;
+//   editButton?: React.ReactNode;
+//   setCurrencyValue?: (value: string | undefined) => void;
+//   minLength?: number;
+//   maxLength?: number;
+//   isLoading?: boolean;
+// }
+
+export interface TextInputProps
+  extends HTMLProps<
+      "input",
+      | "name"
+      | "placeholder"
+      | "autoComplete"
+      | "id"
+      | "onKeyDown"
+      | "onBlur"
+      | "onChange"
+      | "value"
+      | "disabled"
+      | "maxLength"
+      | "minLength"
+    >,
+    DataTestId {
+  // Name is our main identifier for property the value will map to
+  error?: string;
   type?: HTMLInputTypeAttribute | undefined | "currency";
-
-  styleOverrides?: TextInputStyleOverrides;
-  textOverrides?: TextInputTextOverrides;
-
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  color?: Color;
-  fontSize?: Size;
-
-  // PrivateTextInput props
+  label?: string;
+  tooltip?: string;
+  helperText?: string;
+  disabled?: boolean;
   toUpperCase?: boolean;
+  isLoading?: boolean;
+  isRequired?: boolean;
   hyperlinkElement?: any;
   appendComponent?: ReactNode;
   prependComponent?: ReactNode;
   editButton?: React.ReactNode;
   setCurrencyValue?: (value: string | undefined) => void;
-  minLength?: number;
-  maxLength?: number;
-  isLoading?: boolean;
+
+  styleOverrides?: TextInputStyleOverrides;
+  textOverrides?: TextInputTextOverrides;
+
+  color?: Color;
+  fontSize?: Size;
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -67,7 +107,7 @@ const TextInput: React.FC<TextInputProps> = ({
   helperText,
   label,
   placeholder,
-  required,
+  isRequired,
   type,
   onChange,
   onBlur,
@@ -86,6 +126,7 @@ const TextInput: React.FC<TextInputProps> = ({
   minLength,
   maxLength,
   isLoading,
+  ...props
 }) => {
   return (
     <>
@@ -95,11 +136,11 @@ const TextInput: React.FC<TextInputProps> = ({
         autoComplete={autoComplete}
         value={value}
         disabled={disabled}
-        error={error ? helperText : ""}
-        helperText={!error ? helperText : ""}
+        error={error}
+        helperText={helperText}
         label={label}
         placeholder={placeholder}
-        isRequired={required}
+        isRequired={isRequired}
         type={type}
         onChange={onChange}
         onBlur={onBlur}
@@ -117,6 +158,7 @@ const TextInput: React.FC<TextInputProps> = ({
         minLength={minLength}
         maxLength={maxLength}
         isLoading={isLoading}
+        {...props}
       />
     </>
   );

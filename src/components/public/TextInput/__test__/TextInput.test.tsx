@@ -10,7 +10,6 @@ describe("TextInput", () => {
     render(
       <TextInput
         name="first-name"
-        id="first-name"
         onChange={onChangeSpy}
         label="First name"
         {...props}
@@ -41,16 +40,15 @@ describe("TextInput", () => {
       expect(screen.getByText(helperText)).toBeInTheDocument();
     });
 
-    it("should display as error message when helper text is provided and error flag is true", () => {
+    it("should display as error message instead of helper text when both are provided", () => {
       const helperText = "please enter your first name";
-      renderTest({ helperText, error: true, dataTestId: "login-form" });
-      expect(
-        screen.getByTestId("login-form-error-message"),
-      ).toBeInTheDocument();
+      const error = "something went wrong";
+      renderTest({ helperText, error, dataTestId: "login-form" });
+      expect(screen.getByText(error)).toBeInTheDocument();
     });
 
     it('should show word "Required" when input is required', () => {
-      renderTest({ required: true });
+      renderTest({ isRequired: true });
       expect(screen.getByText("Required")).toBeInTheDocument();
     });
 

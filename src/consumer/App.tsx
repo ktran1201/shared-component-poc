@@ -19,11 +19,11 @@ const App: React.FC<AppProps> = ({ color, fontSize }) => {
         autoComplete="off"
         value={val}
         disabled={false}
-        error={false}
+        error="something went wrong"
         helperText="please type your first name"
         label="First name"
         placeholder="First name"
-        required={true}
+        isRequired={true}
         type="text"
         color={color}
         fontSize={fontSize}

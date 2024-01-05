@@ -97,71 +97,77 @@ export interface TextInputProps
   fontSize?: Size;
 }
 
-const TextInput: React.FC<TextInputProps> = ({
-  name,
-  dataTestId,
-  autoComplete,
-  value,
-  disabled,
-  error,
-  helperText,
-  label,
-  placeholder,
-  isRequired,
-  type,
-  onChange,
-  onBlur,
-  onKeyDown,
-  styleOverrides,
-  textOverrides,
-  color,
-  fontSize,
+const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
+  (
+    {
+      name,
+      dataTestId,
+      autoComplete,
+      value,
+      disabled,
+      error,
+      helperText,
+      label,
+      placeholder,
+      isRequired,
+      type,
+      onChange,
+      onBlur,
+      onKeyDown,
+      styleOverrides,
+      textOverrides,
+      color,
+      fontSize,
 
-  toUpperCase,
-  hyperlinkElement,
-  appendComponent,
-  prependComponent,
-  editButton,
-  setCurrencyValue,
-  minLength,
-  maxLength,
-  isLoading,
-  ...props
-}) => {
-  return (
-    <>
-      <PrivateTextInput
-        name={name}
-        dataTestId={dataTestId}
-        autoComplete={autoComplete}
-        value={value}
-        disabled={disabled}
-        error={error}
-        helperText={helperText}
-        label={label}
-        placeholder={placeholder}
-        isRequired={isRequired}
-        type={type}
-        onChange={onChange}
-        onBlur={onBlur}
-        onKeyDown={onKeyDown}
-        styleOverrides={styleOverrides}
-        textOverrides={textOverrides}
-        color={color}
-        fontSize={fontSize}
-        toUpperCase={toUpperCase}
-        hyperlinkElement={hyperlinkElement}
-        appendComponent={appendComponent}
-        prependComponent={prependComponent}
-        editButton={editButton}
-        setCurrencyValue={setCurrencyValue}
-        minLength={minLength}
-        maxLength={maxLength}
-        isLoading={isLoading}
-        {...props}
-      />
-    </>
-  );
-};
+      toUpperCase,
+      hyperlinkElement,
+      appendComponent,
+      prependComponent,
+      editButton,
+      setCurrencyValue,
+      minLength,
+      maxLength,
+      isLoading,
+      ...props
+    },
+    ref,
+  ) => {
+    return (
+      <>
+        <PrivateTextInput
+          name={name}
+          dataTestId={dataTestId}
+          autoComplete={autoComplete}
+          value={value}
+          disabled={disabled}
+          error={error}
+          helperText={helperText}
+          label={label}
+          placeholder={placeholder}
+          isRequired={isRequired}
+          type={type}
+          onChange={onChange}
+          onBlur={onBlur}
+          onKeyDown={onKeyDown}
+          styleOverrides={styleOverrides}
+          textOverrides={textOverrides}
+          color={color}
+          fontSize={fontSize}
+          toUpperCase={toUpperCase}
+          hyperlinkElement={hyperlinkElement}
+          appendComponent={appendComponent}
+          prependComponent={prependComponent}
+          editButton={editButton}
+          setCurrencyValue={setCurrencyValue}
+          minLength={minLength}
+          maxLength={maxLength}
+          isLoading={isLoading}
+          {...props}
+          ref={ref}
+        />
+      </>
+    );
+  },
+);
 
 export default TextInput;

@@ -28,6 +28,7 @@ export interface DataTestId {
 interface OverrideProps {
   styleOverrides?: {
     color?: string;
+    focusColor?: string;
     fontSize?: string;
     width?: string;
   };

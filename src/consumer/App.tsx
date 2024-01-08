@@ -10,7 +10,7 @@ export interface AppProps {
 
 const App: React.FC<AppProps> = ({ color, fontSize }) => {
   const theme = useTheme();
-  const [val, setVal] = useState("");
+  const [val, setVal] = useState<string | undefined>(undefined);
   return (
     <ShareComponentsThemeContext.Provider value={theme}>
       <TextInput
@@ -19,7 +19,7 @@ const App: React.FC<AppProps> = ({ color, fontSize }) => {
         autoComplete="off"
         value={val}
         disabled={false}
-        error={!val ? "first name is required" : ''}
+        error={val === '' ? "first name is required" : ''}
         helperText="please type your first name"
         label="First name"
         placeholder="First name"

@@ -32,6 +32,7 @@ interface OverrideProps {
     width?: string;
   };
   color?: string;
+  focusColor?: string;
   fontSize?: string;
   error?: string;
 }
@@ -49,11 +50,6 @@ const $input = `
 
   &::placeholder {
     color: ${$colorBlackLight};
-  }
-
-  &:focus {
-    outline: transparent;
-    border-color: ${$colorPrimaryMed};
   }
 
   &:disabled {
@@ -75,6 +71,12 @@ const StyledCurrencyInput = styled(CurrencyInput)<OverrideProps>`
     props.styleOverrides?.fontSize || props.fontSize || "16px"};
 
   ${(props) => props.error && `border-color: ${$colorErrorDark};`}
+  
+  &:focus {
+    outline: transparent;
+    border-color: ${(props) =>
+  props.styleOverrides?.focusColor || props.focusColor || $colorPrimaryMed};;
+  }
 `;
 
 const Input = styled.input<OverrideProps>`
@@ -85,6 +87,12 @@ const Input = styled.input<OverrideProps>`
     props.styleOverrides?.fontSize || props.fontSize || "16px"};
 
   ${(props) => props.error && `border-color: ${$colorErrorDark};`}
+  
+  &:focus {
+    outline: transparent;
+    border-color: ${(props) =>
+  props.styleOverrides?.focusColor || props.focusColor || $colorPrimaryMed};;
+  }
 `;
 
 const Label = styled.label<OverrideProps>`
@@ -199,8 +207,8 @@ export const PrivateTextInput = React.forwardRef<
       "aria-describedby": `${dataTestId}-error-helper`,
       error,
       styleOverrides: inputStyleOverrides,
-      color: themeColor,
       fontSize: themeFontSize,
+      focusColor: themeColor,
       id,
     };
 
@@ -219,7 +227,6 @@ export const PrivateTextInput = React.forwardRef<
               styleOverrides={labelStyleOverrides}
               error={error}
               className={styles.label}
-              color={themeColor}
               fontSize={themeFontSize}
             >
               <FieldLabel
@@ -269,7 +276,6 @@ export const PrivateTextInput = React.forwardRef<
             data-testid={`${dataTestId}-text-input-error-helper`}
             error={error}
             styleOverrides={helperTextStyleOverrides}
-            color={themeColor}
             fontSize={themeFontSize}
           >
             {error ? (

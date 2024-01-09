@@ -26,16 +26,16 @@ export interface DataTestId {
 }
 
 interface OverrideProps {
-  styleOverrides?: {
+  $styleOverrides?: {
     color?: string;
     focusColor?: string;
     fontSize?: string;
     width?: string;
   };
-  color?: string;
-  focusColor?: string;
-  fontSize?: string;
-  error?: string;
+  $color?: string;
+  $focusColor?: string;
+  $fontSize?: string;
+  $error?: string;
 }
 
 const $inputErrorLabel = `
@@ -67,42 +67,42 @@ const $input = `
 const StyledCurrencyInput = styled(CurrencyInput)<OverrideProps>`
   ${$input}
 
-  color: ${(props) => props.styleOverrides?.color || props.color || "#000000"};
+  color: ${(props) => props.$styleOverrides?.color || props.$color || "#000000"};
   font-size: ${(props) =>
-    props.styleOverrides?.fontSize || props.fontSize || "16px"};
+    props.$styleOverrides?.fontSize || props.$fontSize || "16px"};
 
-  ${(props) => props.error && `border-color: ${$colorErrorDark};`}
+  ${(props) => props.$error && `border-color: ${$colorErrorDark};`}
   
   &:focus {
     outline: transparent;
     border-color: ${(props) =>
-  props.styleOverrides?.focusColor || props.focusColor || $colorPrimaryMed};;
+  props.$styleOverrides?.focusColor || props.$focusColor || $colorPrimaryMed};;
   }
 `;
 
 const Input = styled.input<OverrideProps>`
   ${$input}
 
-  color: ${(props) => props.styleOverrides?.color || props.color || "#000000"};
+  color: ${(props) => props.$styleOverrides?.color || props.$color || "#000000"};
   font-size: ${(props) =>
-    props.styleOverrides?.fontSize || props.fontSize || "16px"};
+    props.$styleOverrides?.fontSize || props.$fontSize || "16px"};
 
-  ${(props) => props.error && `border-color: ${$colorErrorDark};`}
+  ${(props) => props.$error && `border-color: ${$colorErrorDark};`}
   
   &:focus {
     outline: transparent;
     border-color: ${(props) =>
-  props.styleOverrides?.focusColor || props.focusColor || $colorPrimaryMed};;
+  props.$styleOverrides?.focusColor || props.$focusColor || $colorPrimaryMed};;
   }
 `;
 
 const Label = styled.label<OverrideProps>`
   color: ${(props) =>
-    props.styleOverrides?.color || props.color || $colorBlackMed};
+    props.$styleOverrides?.color || props.$color || $colorBlackMed};
   font-size: ${(props) =>
-    props.styleOverrides?.fontSize || props.fontSize || "12px"};
+    props.$styleOverrides?.fontSize || props.$fontSize || "12px"};
   margin-bottom: 8px;
-  ${(props) => props.error && `${$inputErrorLabel}`}
+  ${(props) => props.$error && `${$inputErrorLabel}`}
 `;
 
 const HelperText = styled.div<OverrideProps>`
@@ -112,17 +112,17 @@ const HelperText = styled.div<OverrideProps>`
   opacity: 1;
   transition: opacity 0.2s;
   color: ${(props) =>
-    props.styleOverrides?.color || props.color || $colorBlackMed};
+    props.$styleOverrides?.color || props.$color || $colorBlackMed};
   font-size: ${(props) =>
-    props.styleOverrides?.fontSize || props.fontSize || "10px"};
-  ${(props) => props.error && `${$inputErrorLabel}`}
+    props.$styleOverrides?.fontSize || props.$fontSize || "10px"};
+  ${(props) => props.$error && `${$inputErrorLabel}`}
 `;
 
 const StyledPrivateTextInput = styled.div<OverrideProps>`
   display: flex;
   flex-direction: column;
   ${(props) =>
-    props.styleOverrides?.width && `width: ${props.styleOverrides?.width};`}
+    props.$styleOverrides?.width && `width: ${props.$styleOverrides?.width};`}
 
   &:focus-within {
     ${HelperText} {
@@ -131,7 +131,7 @@ const StyledPrivateTextInput = styled.div<OverrideProps>`
 
     ${Label} {
       color: ${(props) =>
-        props.styleOverrides?.color || props.color || $colorPrimaryMed};
+        props.$styleOverrides?.color || props.$color || $colorPrimaryMed};
     }
   }
 `;
@@ -175,11 +175,8 @@ export const PrivateTextInput = React.forwardRef<
     const theme = useContext(ShareComponentsThemeContext);
     const themeColor = color ? theme?.colors?.[color] : undefined;
     const themeFontSize = fontSize ? theme?.fontSizes?.[fontSize] : undefined;
-    console.log("theme", theme);
-    console.log("color", color);
-    console.log("fontSize", fontSize);
 
-    const id = Date.now() + "";
+    const id = Date.now() + Math.floor(Math.random() * 10000) + "";
     const { setPrependComponentRef, setAppendComponentRef, inlineInputStyles } =
       useInlineComponents();
 
@@ -206,29 +203,31 @@ export const PrivateTextInput = React.forwardRef<
       style: inlineInputStyles,
       ...props,
       "aria-describedby": `${dataTestId}-error-helper`,
-      error,
-      styleOverrides: inputStyleOverrides,
-      fontSize: themeFontSize,
-      focusColor: themeColor,
+      $error: error,
+      $styleOverrides: inputStyleOverrides,
+      $fontSize: themeFontSize,
+      $focusColor: themeColor,
       id,
+      className: 'usc-text-input-input'
     };
 
     return (
       <StyledPrivateTextInput
         data-testid={`${dataTestId}-text-input-container`}
-        styleOverrides={rootStyleOverrides}
-        color={themeColor}
+        $styleOverrides={rootStyleOverrides}
+        $color={themeColor}
+        className="usc-text-input-container"
       >
-        <div className={styles.header}>
+        <div className={`${styles.header} usc-text-input-header`}>
           {label && (
             // eslint-disable-next-line jsx-a11y/label-has-associated-control
             <Label
               data-testid={`${dataTestId}-text-input-label`}
               htmlFor={id}
-              styleOverrides={labelStyleOverrides}
-              error={error}
-              className={styles.label}
-              fontSize={themeFontSize}
+              $styleOverrides={labelStyleOverrides}
+              $error={error}
+              className={`${styles.label} usc-text-input-label`}
+              $fontSize={themeFontSize}
             >
               <FieldLabel
                 isRequired={isRequired}
@@ -275,9 +274,10 @@ export const PrivateTextInput = React.forwardRef<
           <HelperText
             id={`${id}-error-helper`}
             data-testid={`${dataTestId}-text-input-error-helper`}
-            error={error}
-            styleOverrides={helperTextStyleOverrides}
-            fontSize={themeFontSize}
+            $error={error}
+            $styleOverrides={helperTextStyleOverrides}
+            $fontSize={themeFontSize}
+            className='usc-text-input-helper-text'
           >
             {error ? (
               <ErrorMessage message={error} dataTestId={dataTestId} />

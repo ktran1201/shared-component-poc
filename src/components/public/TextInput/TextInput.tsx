@@ -7,6 +7,7 @@ interface StyleOverrides {
   color?: string;
   fontSize?: string;
   width?: string;
+  height?: string;
 }
 
 export interface TextInputStyleOverrides {

@@ -63,6 +63,7 @@ export const withOverrides: Story = {
     styleOverrides: {
       root: {
         width: "100%",
+        height: "100px",
         color: "red",
       },
       label: {

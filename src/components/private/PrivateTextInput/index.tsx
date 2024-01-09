@@ -31,6 +31,7 @@ interface OverrideProps {
     focusColor?: string;
     fontSize?: string;
     width?: string;
+    height?: string;
   };
   $color?: string;
   $focusColor?: string;
@@ -67,32 +68,38 @@ const $input = `
 const StyledCurrencyInput = styled(CurrencyInput)<OverrideProps>`
   ${$input}
 
-  color: ${(props) => props.$styleOverrides?.color || props.$color || "#000000"};
+  color: ${(props) =>
+    props.$styleOverrides?.color || props.$color || "#000000"};
   font-size: ${(props) =>
     props.$styleOverrides?.fontSize || props.$fontSize || "16px"};
 
   ${(props) => props.$error && `border-color: ${$colorErrorDark};`}
-  
+
   &:focus {
     outline: transparent;
     border-color: ${(props) =>
-  props.$styleOverrides?.focusColor || props.$focusColor || $colorPrimaryMed};;
+      props.$styleOverrides?.focusColor ||
+      props.$focusColor ||
+      $colorPrimaryMed};
   }
 `;
 
 const Input = styled.input<OverrideProps>`
   ${$input}
 
-  color: ${(props) => props.$styleOverrides?.color || props.$color || "#000000"};
+  color: ${(props) =>
+    props.$styleOverrides?.color || props.$color || "#000000"};
   font-size: ${(props) =>
     props.$styleOverrides?.fontSize || props.$fontSize || "16px"};
 
   ${(props) => props.$error && `border-color: ${$colorErrorDark};`}
-  
+
   &:focus {
     outline: transparent;
     border-color: ${(props) =>
-  props.$styleOverrides?.focusColor || props.$focusColor || $colorPrimaryMed};;
+      props.$styleOverrides?.focusColor ||
+      props.$focusColor ||
+      $colorPrimaryMed};
   }
 `;
 
@@ -123,6 +130,9 @@ const StyledPrivateTextInput = styled.div<OverrideProps>`
   flex-direction: column;
   ${(props) =>
     props.$styleOverrides?.width && `width: ${props.$styleOverrides?.width};`}
+  ${(props) =>
+    props.$styleOverrides?.height &&
+    `height: ${props.$styleOverrides?.height};`}
 
   &:focus-within {
     ${HelperText} {
@@ -208,7 +218,7 @@ export const PrivateTextInput = React.forwardRef<
       $fontSize: themeFontSize,
       $focusColor: themeColor,
       id,
-      className: 'usc-text-input-input'
+      className: "usc-text-input-input",
     };
 
     return (
@@ -277,7 +287,7 @@ export const PrivateTextInput = React.forwardRef<
             $error={error}
             $styleOverrides={helperTextStyleOverrides}
             $fontSize={themeFontSize}
-            className='usc-text-input-helper-text'
+            className="usc-text-input-helper-text"
           >
             {error ? (
               <ErrorMessage message={error} dataTestId={dataTestId} />

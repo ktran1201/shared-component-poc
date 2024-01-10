@@ -37,7 +37,7 @@ describe("TextInput", () => {
     it("should display helper text when provided", () => {
       const helperText = "please enter your first name";
       renderTest({ helperText });
-      expect(screen.getByText(helperText)).toBeInTheDocument();
+      expect(screen.getByText(helperText + '...')).toBeInTheDocument();
     });
 
     it("should display as error message instead of helper text when both are provided", () => {

@@ -296,7 +296,7 @@ export const PrivateTextInput = React.forwardRef<
             {error ? (
               <ErrorMessage message={error} dataTestId={dataTestId} />
             ) : (
-              helperText
+              helperText + '...'
             )}
           </HelperText>
         )}

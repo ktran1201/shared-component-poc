@@ -32,6 +32,7 @@ interface OverrideProps {
     fontSize?: string;
     width?: string;
     height?: string;
+    margin?: string;
   };
   $color?: string;
   $focusColor?: string;
@@ -133,6 +134,9 @@ const StyledPrivateTextInput = styled.div<OverrideProps>`
   ${(props) =>
     props.$styleOverrides?.height &&
     `height: ${props.$styleOverrides?.height};`}
+  ${(props) =>
+    props.$styleOverrides?.margin &&
+    `margin: ${props.$styleOverrides?.margin};`}
 
   &:focus-within {
     ${HelperText} {

@@ -1,6 +1,6 @@
 import React, { HTMLInputTypeAttribute, ReactNode } from "react";
 import { Color, Size } from "../../../theme";
-import { DataTestId, PrivateTextInput } from "../../private/PrivateTextInput";
+import { DataTestId, PrivateTextInput } from "../../../private-components/PrivateTextInput";
 import { HTMLProps } from "../../../utils/htmlProps";
 
 interface StyleOverrides {

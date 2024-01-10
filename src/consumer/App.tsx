@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import { TextInput } from "../components/public/TextInput";
+import { TextInput } from "../components/atoms/TextInput";
 import { useTheme } from "./useTheme";
 import { Color, ShareComponentsThemeContext, Size } from "../theme";
 

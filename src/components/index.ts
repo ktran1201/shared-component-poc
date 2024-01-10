@@ -1,2 +1,2 @@
-export * from "./public";
-export * from "./private/InstoreTextInput";
+export * from "./atoms";
+export * from "../private-components/InstoreTextInput";

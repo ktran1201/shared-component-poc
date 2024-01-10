@@ -6,19 +6,19 @@ import classNames from "classnames";
 
 import styles from "./TextInput.module.scss";
 
-import { TextInputProps } from "../../public/TextInput/TextInput";
+import { TextInputProps } from "../../components/atoms/TextInput/TextInput";
 import styled from "styled-components";
 import Loader, { LoaderSize } from "../Loader";
 import FieldLabel from "../FieldLabel";
 import ErrorMessage from "../ErrorMessage";
-import { ShareComponentsThemeContext } from "../../../theme";
+import { ShareComponentsThemeContext } from "../../theme";
 import {
   $colorBlackLight,
   $colorBlackMed,
   $colorErrorDark,
   $colorInputBorderGrey,
   $colorPrimaryMed,
-} from "../../../constants/styles";
+} from "../../constants/styles";
 import CurrencyInput from "react-currency-input-field";
 
 export interface DataTestId {

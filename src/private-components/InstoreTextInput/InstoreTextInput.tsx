@@ -8,7 +8,7 @@ import React, {
 } from "react";
 
 import classNames from "classnames";
-import { HTMLProps } from "../../../utils/htmlProps";
+import { HTMLProps } from "../../utils/htmlProps";
 import Loader, { LoaderSize } from "../Loader";
 import FieldLabel from "../FieldLabel";
 import ErrorMessage from "../ErrorMessage";

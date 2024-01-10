@@ -1,5 +1,5 @@
 {
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "A library that shared UI components reside. This can help building UAR applications faster and having consistent look and feel, consumer can also override styles and texts.",
   "type": "module",
   "module": "dist/index.es.js",
